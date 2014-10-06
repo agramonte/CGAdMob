@@ -1,0 +1,2 @@
+SCONS;build_cgadmobexample_scons_x86;
+SCONS;build_cgadmobexample_scons_arm;

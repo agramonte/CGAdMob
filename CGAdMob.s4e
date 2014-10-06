@@ -1,0 +1,43 @@
+include:
+#include <s3eTypes.h>
+
+functions:
+
+/**
+ * Most work is done in this method. Call it after setting up the key.
+ */
+void InitAdView() run_on_os_thread
+
+
+/**
+ * Returns true if the interstitial ad ready and was displayed successfully.
+ */
+bool ShowInterstitialAd() run_on_os_thread
+
+
+/**
+* Currently only works with a max of 2 ad units. This might change in the future.
+*/
+void SetGoogleAppKey(const char* bannerAdUnitId, const char* interstatialAdUnitId) run_on_os_thread
+
+
+/**
+ * Load the ad. Needs to be called every time you need the ad refreshed.
+ * Make sure you turn off auto refresh in the admob ad unit configuration.
+ */
+void BannerAdLoad() run_on_os_thread
+
+/**
+ * Show the banner ad.
+ */
+void BannerAdShow() run_on_os_thread
+
+/**
+ * Hide the banner ad.
+ */
+void BannerAdHide() run_on_os_thread
+
+/**
+ * Release any resources.
+ */
+void Release() void run_on_os_thread
