@@ -45,7 +45,7 @@ bool GameLayer::init()
     if (CGAdMobAvailable()) {
         
         //Set up both Ad spot keys.
-        SetGoogleAppKey("your banner ad unit id.", "your interstatial unit id.");
+        SetGoogleAppKey("ca-app-pub-3486822110039240/6566762384", "ca-app-pub-3486822110039240/8043495582");
         
         //Set up the views.
         InitAdView();

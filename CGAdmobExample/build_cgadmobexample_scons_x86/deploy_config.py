@@ -6,7 +6,7 @@
 config = {}
 cmdline = ['/Applications/Marmalade.app/Contents/s3e/makefile_builder/mkb.py', '/Users/adriangomez/OneDrive/Development/CGAdmobExample/CGAdmobExample.mkb', '--deploy-only', '--hub-data', '/Users/adriangomez/OneDrive/Development/CGAdmobExample/project_CGAdmobExample/mkb-scons.txt', '--buildenv=SCONS']
 mkb = '/Users/adriangomez/OneDrive/Development/CGAdmobExample/CGAdmobExample.mkb'
-mkf = ['/Applications/Marmalade.app/Contents/s3e/s3e-default.mkf', '/Applications/Marmalade.app/Contents/modules/iwutil/iwutil.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/libjpeg/libjpeg.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/libpng/libpng.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/zlib/zlib.mkf', '/Applications/Marmalade.app/Contents/modules/iwgl/iwgl.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/cocos2dx/proj.marmalade/cocos2dx.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/cocos2dx/platform/third_party/marmalade/libxml2.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/cocos2dx/platform/third_party/marmalade/freetype.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/cocos2dx/platform/third_party/marmalade/libtiff/libtiff.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/external/Box2D/proj.marmalade/Box2D.mkf']
+mkf = ['/Applications/Marmalade.app/Contents/s3e/s3e-default.mkf', '/Applications/Marmalade.app/Contents/modules/iwutil/iwutil.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/libjpeg/libjpeg.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/libpng/libpng.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/zlib/zlib.mkf', '/Applications/Marmalade.app/Contents/modules/iwgl/iwgl.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/cocos2dx/proj.marmalade/cocos2dx.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/cocos2dx/platform/third_party/marmalade/libxml2.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/cocos2dx/platform/third_party/marmalade/freetype.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/cocos2dx/platform/third_party/marmalade/libtiff/libtiff.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/external/Box2D/proj.marmalade/Box2D.mkf', '/Users/adriangomez/OneDrive/Development/CGAdMob/CGAdMob.mkf']
 
 class DeployConfig(object):
     pass
@@ -31,7 +31,7 @@ class DefaultConfig(DeployConfig):
     version = [0, 0, 1]
     config = ['/Users/adriangomez/OneDrive/Development/CGAdmobExample/data/app.icf']
     data_dir = '/Users/adriangomez/OneDrive/Development/CGAdmobExample/data'
-    iphone_link_lib = []
+    iphone_link_lib = ['CGAdMob']
     osx_ext_dll = []
     wp81_extra_pri = []
     ws8_ext_capabilities = []
@@ -39,14 +39,14 @@ class DefaultConfig(DeployConfig):
     win32_ext_dll = []
     wp8_ext_capabilities = []
     ws81_ext_managed_dll = []
-    iphone_link_libdir = []
+    iphone_link_libdir = ['/Users/adriangomez/OneDrive/Development/CGAdMob/lib/iphone']
     wp81_ext_capabilities = []
-    android_extra_application_manifest = []
+    android_extra_application_manifest = ['/Users/adriangomez/OneDrive/Development/CGAdMob/extras.application.txt']
     ws8_ext_native_dll = []
     android_external_assets = []
     blackberry_extra_descriptor = []
     ws8_extra_res = []
-    android_extra_manifest = []
+    android_extra_manifest = ['/Users/adriangomez/OneDrive/Development/CGAdMob/extras.manifest.txt']
     wp81_ext_sdk_ref = []
     iphone_link_libdirs = []
     wp81_ext_device_capabilities = []
@@ -55,7 +55,7 @@ class DefaultConfig(DeployConfig):
     ws8_ext_sdk_manifest_part = []
     ws8_ext_device_capabilities = []
     ws81_extra_pri = []
-    android_external_jars = []
+    android_external_jars = ['/Users/adriangomez/OneDrive/Development/CGAdMob/incoming/android/google-play-services.jar', '/Users/adriangomez/OneDrive/Development/CGAdMob/incoming/android/android-support-v4.jar', '/Users/adriangomez/OneDrive/Development/CGAdMob/lib/android/CGAdMob.jar']
     win8_winrt_extra_res = []
     wp81_ext_sdk_manifest_part = []
     android_supports_gl_texture = []
@@ -75,7 +75,7 @@ class DefaultConfig(DeployConfig):
     ws81_ext_native_dll = []
     ws8_extra_pri = []
     wp8_ext_managed_dll = []
-    android_so = []
+    android_so = ['/Users/adriangomez/OneDrive/Development/CGAdMob/lib/android/libCGAdMob.so']
     wp8_ext_sdk_ref = []
     osx_extra_res = []
     ws81_extra_res = []

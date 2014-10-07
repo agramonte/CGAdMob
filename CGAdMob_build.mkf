@@ -29,13 +29,14 @@ subproject "$MARMALADE_ROOT/s3e/edk"
 if {{defined I3D_OS_IPHONE}}
 {
     files
-    {
-        
+    {   
         ["source"]
         (use_first_found, source/iphone, source/generic)
         CGAdMob_platform.mm
         #Add any iphone-specific files here
     }
+    
+    includepath GoogleMobileAdsSdkiOS
 }
 
 if {{defined I3D_OS_WINDOWS}}
@@ -48,6 +49,7 @@ if {{defined I3D_OS_WINDOWS}}
         CGAdMob_platform.cpp
         #Add any windows-specific files here
     }
+
 }
 
 if {{defined S3E_ANDROID}}
@@ -83,6 +85,7 @@ if {{defined I3D_OS_LINUX and not defined S3E_ANDROID}}
         CGAdMob_platform.cpp
         #Add any linux-specific files here
     }
+
 }
 
 if {{defined I3D_OS_WP8}}

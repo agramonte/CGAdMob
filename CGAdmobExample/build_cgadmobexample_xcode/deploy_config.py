@@ -4,7 +4,7 @@
 # tool during the build process.
 
 config = {}
-cmdline = ['/Applications/Marmalade.app/Contents/s3e/makefile_builder/mkb.py', '/Users/adriangomez/OneDrive/Development/CGAdmobExample/CGAdmobExample.mkb', '--buildenv=XCODE', '--deploy-only']
+cmdline = ['/Applications/Marmalade.app/Contents/s3e/makefile_builder/mkb.py', '/Users/adriangomez/OneDrive/Development/CGAdmobExample/CGAdmobExample.mkb', '--buildenv=XCODE', '--test-assets', 'Default', '--deploy-only']
 mkb = '/Users/adriangomez/OneDrive/Development/CGAdmobExample/CGAdmobExample.mkb'
 mkf = ['/Applications/Marmalade.app/Contents/s3e/s3e-default.mkf', '/Applications/Marmalade.app/Contents/modules/iwutil/iwutil.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/libjpeg/libjpeg.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/libpng/libpng.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/zlib/zlib.mkf', '/Applications/Marmalade.app/Contents/modules/iwgl/iwgl.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/cocos2dx/proj.marmalade/cocos2dx.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/cocos2dx/platform/third_party/marmalade/libxml2.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/cocos2dx/platform/third_party/marmalade/freetype.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/cocos2dx/platform/third_party/marmalade/libtiff/libtiff.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/external/Box2D/proj.marmalade/Box2D.mkf', '/Users/adriangomez/OneDrive/Development/CGAdMob/CGAdMob.mkf']
 
@@ -31,7 +31,7 @@ class DefaultConfig(DeployConfig):
     version = [0, 0, 1]
     config = ['/Users/adriangomez/OneDrive/Development/CGAdmobExample/data/app.icf']
     data_dir = '/Users/adriangomez/OneDrive/Development/CGAdmobExample/data'
-    iphone_link_lib = []
+    iphone_link_lib = ['CGAdMob', 'libGoogleAdMobAds']
     osx_ext_dll = []
     wp81_extra_pri = []
     ws8_ext_capabilities = []
@@ -39,7 +39,7 @@ class DefaultConfig(DeployConfig):
     win32_ext_dll = []
     wp8_ext_capabilities = []
     ws81_ext_managed_dll = []
-    iphone_link_libdir = []
+    iphone_link_libdir = ['/Users/adriangomez/OneDrive/Development/CGAdMob/GoogleMobileAdsSdkiOS', '/Users/adriangomez/OneDrive/Development/CGAdMob/lib/iphone']
     wp81_ext_capabilities = []
     android_extra_application_manifest = ['/Users/adriangomez/OneDrive/Development/CGAdMob/extras.application.txt']
     ws8_ext_native_dll = []
@@ -69,7 +69,7 @@ class DefaultConfig(DeployConfig):
     wp8_ext_native_dll = []
     win8_phone_extra_res = []
     win8_store_extra_res = []
-    iphone_link_opts = []
+    iphone_link_opts = ['-F$MARMALADE_ROOT/extensions/AmazonAds/source/iphone -framework AmazonAd -weak_framework AdSupport -weak_framework Security -weak_framework SystemConfiguration -weak_framework CoreTelephony -lsqlite3']
     ws81_ext_sdk_ref = []
     wp8_extra_res = []
     ws81_ext_native_dll = []

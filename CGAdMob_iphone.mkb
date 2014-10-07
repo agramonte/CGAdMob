@@ -1,0 +1,13 @@
+#!/usr/bin/env mkb
+# Builder mkb file for the CGAdMob extension on iphone
+platform IPHONE
+
+options
+{
+    lib
+    output-name="lib/iphone/libCGAdMob.a"
+    output-name-debug="lib/iphone/libCGAdMob_d.a"
+}
+define S3E_BUILD_EXT
+
+subproject CGAdMob_build
