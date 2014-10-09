@@ -38,6 +38,21 @@ void BannerAdShow() run_on_os_thread
 void BannerAdHide() run_on_os_thread
 
 /**
+ * Optional: True to display banner ad in Landscape mode. Default is false.
+ */
+void IsLandscape(bool landscape) run_on_os_thread
+
+/**
+* Optional: If not called banner will display at the top.
+*/
+void BannerAdPosition(int x, int y) run_on_os_thread
+
+/**
+* Optional: Sets the test device string.
+*/
+void TestDeviceHashedId(const char* deviceHashId) run_on_os_thread
+
+/**
  * Release any resources.
  */
 void Release() void run_on_os_thread

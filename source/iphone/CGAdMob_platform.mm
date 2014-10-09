@@ -31,6 +31,7 @@
 @property (nonatomic, strong) GADInterstitial *interstitial;
 @property (nonatomic, strong) GADBannerView  *bannerView;
 @property (nonatomic) const char *interstatialAdId;
+@property (nonatomic, retain) NSString *deviceHashId;
 @end
 
 @implementation CGAdMob
@@ -39,25 +40,17 @@
 -(void)loadInterstitialRequest{
     
     GADRequest *request = [GADRequest request];
-    //request.testDevices = @[ @"1f61bb7c8f455ad1d7c36d69e54d7a91"];
+    request.testDevices = @[ self.deviceHashId];
     [self.interstitial loadRequest:request];
 }
 
 -(void)loadBannerRequest{
     
     GADRequest *request = [GADRequest request];
-    //request.testDevices = @[ @"1f61bb7c8f455ad1d7c36d69e54d7a91"];
+    request.testDevices = @[ self.deviceHashId];
     [self.bannerView loadRequest:request];
 }
 
--(void)initBannerAd:(const char *)appId{
-    
-    self.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
-    self.bannerView.adUnitID = [[NSString alloc] initWithUTF8String:appId];
-    self.bannerView.rootViewController = s3eEdkGetUIViewController();
-    [s3eEdkGetUIView() addSubview:self.bannerView];
-}
-     
 -(void)initInterstitial:(const char *)appId{
     
     self.interstatialAdId = appId;
@@ -69,7 +62,6 @@
     self.interstitial = [[GADInterstitial alloc] init];
     self.interstitial.adUnitID = [[NSString alloc] initWithUTF8String:self.interstatialAdId];
     
-    
 }
 
 -(void)showInterstitial{
@@ -78,8 +70,8 @@
     if ([self.interstitial isReady]) {
         
         info = [NSString stringWithFormat:
-                          @"--------------------------------------- Interstitial is Ready."];
-
+                @"--------------------------------------- Interstitial is Ready."];
+        
         [self.interstitial presentFromRootViewController:s3eEdkGetUIViewController()];
         
         self.initInterstitial;
@@ -87,9 +79,9 @@
         
     } else
     {
-    
+        
         info = [NSString stringWithFormat:
-                          @"--------------------------------------- Interstitial not Ready."];
+                @"--------------------------------------- Interstitial not Ready."];
     }
     
     s3eDebugOutputString([info UTF8String]);
@@ -103,6 +95,13 @@
 
 CGAdMob *intAd = [[CGAdMob alloc] autorelease];
 
+const char* _bannerAdUnitId = "";
+const char* _interstatialAdUnitId = "";
+bool _landscape = false;
+CGPoint _point;
+bool _pointSet = false;
+
+
 s3eResult CGAdMobInit_platform()
 {
     // Add any platform-specific initialisation code here
@@ -110,12 +109,38 @@ s3eResult CGAdMobInit_platform()
 }
 
 void CGAdMobTerminate_platform()
-{ 
+{
 }
 
 void InitAdView_platform()
 {
-   
+    //Start the banner ads
+    if (_landscape) {
+        
+        if (_pointSet) {
+            intAd.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerLandscape origin:(CGPoint)_point];
+        }else
+        {
+            intAd.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerLandscape];
+        }
+        
+    } else
+    {
+        if (_pointSet) {
+            intAd.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait origin:(CGPoint)_point];
+        } else {
+        intAd.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
+        }
+    }
+    
+    intAd.bannerView.adUnitID = [[NSString alloc] initWithUTF8String:_bannerAdUnitId];
+    intAd.bannerView.rootViewController = s3eEdkGetUIViewController();
+    
+    [s3eEdkGetUIView() addSubview:intAd.bannerView];
+    [intAd loadBannerRequest];
+    
+    //Start the interstitial
+    [intAd initInterstitial:_interstatialAdUnitId];
     [intAd loadInterstitialRequest];
 }
 
@@ -127,16 +152,14 @@ bool ShowInterstitialAd_platform()
 
 void SetGoogleAppKey_platform(const char* bannerAdUnitId, const char* interstatialAdUnitId)
 {
-    [intAd initInterstitial:interstatialAdUnitId];
-    
-    [intAd initBannerAd:bannerAdUnitId];
-    
+    _bannerAdUnitId = bannerAdUnitId;
+    _interstatialAdUnitId = interstatialAdUnitId;
 }
 
 
 void BannerAdLoad_platform()
 {
-     [intAd loadBannerRequest];
+    [intAd loadBannerRequest];
 }
 
 void BannerAdShow_platform()
@@ -147,6 +170,24 @@ void BannerAdShow_platform()
 void BannerAdHide_platform()
 {
     [intAd.bannerView setHidden:NO];
+}
+
+void IsLandscape_platform(bool landscape)
+{
+    _landscape = landscape;
+    
+}
+
+void BannerAdPosition_platform(int x, int y)
+{
+    _point.x = x;
+    _point.y = y;
+    _pointSet = true;
+}
+
+void TestDeviceHashedId_platform(const char* deviceHashId)
+{
+    intAd.deviceHashId = [[NSString alloc] initWithUTF8String:deviceHashId];
 }
 
 void Release_platform()

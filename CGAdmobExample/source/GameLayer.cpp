@@ -45,12 +45,21 @@ bool GameLayer::init()
     if (CGAdMobAvailable()) {
         
         //Set up both Ad spot keys.
-        SetGoogleAppKey("ca-app-pub-3486822110039240/6566762384", "ca-app-pub-3486822110039240/8043495582");
+        SetGoogleAppKey("banner app id", "interstatial app id");
+        
+        //Optional: Un-comment to make it landscape. It does nothing on Android since the smart ads rotate appropiately. On iOS the documentation states I need it to change a property to landscape, but I have not seen a difference.
+        //IsLandscape(true);
+        
+        //Optional: Specify the position of the ad. On iOS the add will be placed as specified. On Android increasing the y axis will result in the ad being placed at the bottom.
+        //BannerAdPosition(0, 200);
+        
+        //Optional: Add the device hash id so that you recieve test ads on your test device.
+        //TestDeviceHashedId("your device test hash here.");
         
         //Set up the views.
         InitAdView();
         
-        //Load the banner ad.
+        //Call this once to show banner ad. And if you have not specified a refresh interval, call it every time you need to refresh the banner ad.
         BannerAdLoad();
         
         //Timer to load the next one.

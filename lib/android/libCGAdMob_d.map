@@ -91,247 +91,253 @@ Memory map
 .hash           0x00000d68      0x274
  ** hash        0x00000d68      0x274
 
-.rel.dyn        0x00000fdc       0x90
+.rel.dyn        0x00000fdc       0xa8
  ** dynamic relocs
-                0x00000fdc       0x90
+                0x00000fdc       0xa8
 
-.rel.plt        0x0000106c       0xf0
+.rel.plt        0x00001084       0xf0
  ** dynamic relocs
-                0x0000106c       0xf0
+                0x00001084       0xf0
 
-.plt            0x0000115c      0x17c
- ** PLT         0x0000115c      0x17c
+.plt            0x00001174      0x17c
+ ** PLT         0x00001174      0x17c
 
-.text           0x000012d8     0x3f38
- .text.exit     0x000012d8       0x10 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtbegin_so.o
-                0x000012d8                __on_dlclose
+.text           0x000012f0     0x4434
+ .text.exit     0x000012f0       0x10 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtbegin_so.o
+                0x000012f0                __on_dlclose
  .text.startup._GLOBAL__sub_I_IwDebug.cpp
-                0x000012e8       0x88 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
- .text          0x00001370       0x14 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtbegin_so.o
-                0x00001370                atexit
- .text          0x00001384      0x78c debug/CGAdMob_platform.os
-                0x00001488                CGAdMobInit_platform()
-                0x000018c8                CGAdMobTerminate_platform()
-                0x000018cc                InitAdView_platform()
-                0x00001914                ShowInterstitialAd_platform()
-                0x00001974                SetGoogleAppKey_platform(char const*, char const*)
-                0x000019f0                BannerAdLoad_platform()
-                0x00001a38                BannerAdShow_platform()
-                0x00001a80                BannerAdHide_platform()
-                0x00001ac8                Release_platform()
+                0x00001300       0x88 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+ .text          0x00001388       0x14 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtbegin_so.o
+                0x00001388                atexit
+ .text          0x0000139c      0x9f8 debug/CGAdMob_platform.os
+                0x000014a0                CGAdMobInit_platform()
+                0x00001a00                CGAdMobTerminate_platform()
+                0x00001a48                InitAdView_platform()
+                0x00001a90                ShowInterstitialAd_platform()
+                0x00001af0                SetGoogleAppKey_platform(char const*, char const*)
+                0x00001b6c                BannerAdLoad_platform()
+                0x00001bb4                BannerAdShow_platform()
+                0x00001bfc                BannerAdHide_platform()
+                0x00001c44                IsLandscape_platform(bool)
+                0x00001c90                BannerAdPosition_platform(int, int)
+                0x00001cec                TestDeviceHashedId_platform(char const*)
+                0x00001d4c                Release_platform()
  .text._ZN7_JNIEnv9FindClassEPKc
-                0x00001b10       0x38 debug/CGAdMob_platform.os
-                0x00001b10                _JNIEnv::FindClass(char const*)
+                0x00001d94       0x38 debug/CGAdMob_platform.os
+                0x00001d94                _JNIEnv::FindClass(char const*)
  .text._ZN7_JNIEnv17ExceptionOccurredEv
-                0x00001b48       0x30 debug/CGAdMob_platform.os
-                0x00001b48                _JNIEnv::ExceptionOccurred()
+                0x00001dcc       0x30 debug/CGAdMob_platform.os
+                0x00001dcc                _JNIEnv::ExceptionOccurred()
  .text._ZN7_JNIEnv17ExceptionDescribeEv
-                0x00001b78       0x28 debug/CGAdMob_platform.os
-                0x00001b78                _JNIEnv::ExceptionDescribe()
+                0x00001dfc       0x28 debug/CGAdMob_platform.os
+                0x00001dfc                _JNIEnv::ExceptionDescribe()
  .text._ZN7_JNIEnv14ExceptionClearEv
-                0x00001ba0       0x28 debug/CGAdMob_platform.os
-                0x00001ba0                _JNIEnv::ExceptionClear()
+                0x00001e24       0x28 debug/CGAdMob_platform.os
+                0x00001e24                _JNIEnv::ExceptionClear()
  .text._ZN7_JNIEnv12NewGlobalRefEP8_jobject
-                0x00001bc8       0x38 debug/CGAdMob_platform.os
-                0x00001bc8                _JNIEnv::NewGlobalRef(_jobject*)
+                0x00001e4c       0x38 debug/CGAdMob_platform.os
+                0x00001e4c                _JNIEnv::NewGlobalRef(_jobject*)
  .text._ZN7_JNIEnv15DeleteGlobalRefEP8_jobject
-                0x00001c00       0x30 debug/CGAdMob_platform.os
-                0x00001c00                _JNIEnv::DeleteGlobalRef(_jobject*)
+                0x00001e84       0x30 debug/CGAdMob_platform.os
+                0x00001e84                _JNIEnv::DeleteGlobalRef(_jobject*)
  .text._ZN7_JNIEnv14DeleteLocalRefEP8_jobject
-                0x00001c30       0x30 debug/CGAdMob_platform.os
-                0x00001c30                _JNIEnv::DeleteLocalRef(_jobject*)
+                0x00001eb4       0x30 debug/CGAdMob_platform.os
+                0x00001eb4                _JNIEnv::DeleteLocalRef(_jobject*)
  .text._ZN7_JNIEnv9NewObjectEP7_jclassP10_jmethodIDz
-                0x00001c60       0x58 debug/CGAdMob_platform.os
-                0x00001c60                _JNIEnv::NewObject(_jclass*, _jmethodID*, ...)
+                0x00001ee4       0x58 debug/CGAdMob_platform.os
+                0x00001ee4                _JNIEnv::NewObject(_jclass*, _jmethodID*, ...)
  .text._ZN7_JNIEnv11GetMethodIDEP7_jclassPKcS3_
-                0x00001cb8       0x48 debug/CGAdMob_platform.os
-                0x00001cb8                _JNIEnv::GetMethodID(_jclass*, char const*, char const*)
+                0x00001f3c       0x48 debug/CGAdMob_platform.os
+                0x00001f3c                _JNIEnv::GetMethodID(_jclass*, char const*, char const*)
  .text._ZN7_JNIEnv17CallBooleanMethodEP8_jobjectP10_jmethodIDz
-                0x00001d00       0x5c debug/CGAdMob_platform.os
-                0x00001d00                _JNIEnv::CallBooleanMethod(_jobject*, _jmethodID*, ...)
+                0x00001f84       0x5c debug/CGAdMob_platform.os
+                0x00001f84                _JNIEnv::CallBooleanMethod(_jobject*, _jmethodID*, ...)
  .text._ZN7_JNIEnv14CallVoidMethodEP8_jobjectP10_jmethodIDz
-                0x00001d5c       0x4c debug/CGAdMob_platform.os
-                0x00001d5c                _JNIEnv::CallVoidMethod(_jobject*, _jmethodID*, ...)
+                0x00001fe0       0x4c debug/CGAdMob_platform.os
+                0x00001fe0                _JNIEnv::CallVoidMethod(_jobject*, _jmethodID*, ...)
  .text._ZN7_JNIEnv12NewStringUTFEPKc
-                0x00001da8       0x38 debug/CGAdMob_platform.os
-                0x00001da8                _JNIEnv::NewStringUTF(char const*)
+                0x0000202c       0x38 debug/CGAdMob_platform.os
+                0x0000202c                _JNIEnv::NewStringUTF(char const*)
  .text._ZN7_JavaVM6GetEnvEPPvi
-                0x00001de0       0x40 debug/CGAdMob_platform.os
-                0x00001de0                _JavaVM::GetEnv(void**, int)
- .text          0x00001e20       0x90 debug/CGAdMob.os
-                0x00001e20                CGAdMobInit()
-                0x00001e34                CGAdMobTerminate()
-                0x00001e40                InitAdView
-                0x00001e4c                ShowInterstitialAd
-                0x00001e5c                SetGoogleAppKey
-                0x00001e80                BannerAdLoad
-                0x00001e8c                BannerAdShow
-                0x00001e98                BannerAdHide
-                0x00001ea4                Release
- .text          0x00001eb0      0x520 debug/CGAdMob_register.os
-                0x00002298                CGAdMobRegisterExt()
-                0x000023c4                RegisterExt
- .text          0x000023d0        0x0 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+                0x00002064       0x40 debug/CGAdMob_platform.os
+                0x00002064                _JavaVM::GetEnv(void**, int)
+ .text          0x000020a4       0xf4 debug/CGAdMob.os
+                0x000020a4                CGAdMobInit()
+                0x000020b8                CGAdMobTerminate()
+                0x000020c4                InitAdView
+                0x000020d0                ShowInterstitialAd
+                0x000020e0                SetGoogleAppKey
+                0x00002104                BannerAdLoad
+                0x00002110                BannerAdShow
+                0x0000211c                BannerAdHide
+                0x00002128                IsLandscape
+                0x0000214c                BannerAdPosition
+                0x00002170                TestDeviceHashedId
+                0x0000218c                Release
+ .text          0x00002198      0x74c debug/CGAdMob_register.os
+                0x00002758                CGAdMobRegisterExt()
+                0x000028d8                RegisterExt
+ .text          0x000028e4        0x0 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
  .text.IwDebugClearConfigCache
-                0x000023d0       0x80 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
-                0x000023d0                IwDebugClearConfigCache
+                0x000028e4       0x80 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+                0x000028e4                IwDebugClearConfigCache
  .text.IwDebugAssertIsChannelOn
-                0x00002450      0x1ec /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
-                0x00002450                IwDebugAssertIsChannelOn
+                0x00002964      0x1ec /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+                0x00002964                IwDebugAssertIsChannelOn
  .text.IwDebugAssertShow
-                0x0000263c      0x2e8 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
-                0x0000263c                IwDebugAssertShow
+                0x00002b50      0x2e8 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+                0x00002b50                IwDebugAssertShow
  .text.IwDebugAssertSetSolution
-                0x00002924       0xb8 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
-                0x00002924                IwDebugAssertSetSolution
+                0x00002e38       0xb8 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+                0x00002e38                IwDebugAssertSetSolution
  .text.IwDebugAssertSetMessage
-                0x000029dc      0x100 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
-                0x000029dc                IwDebugAssertSetMessage
+                0x00002ef0      0x100 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+                0x00002ef0                IwDebugAssertSetMessage
  .text.IwAssertRegisterTextCallback
-                0x00002adc       0x1c /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
-                0x00002adc                IwAssertRegisterTextCallback
+                0x00002ff0       0x1c /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+                0x00002ff0                IwAssertRegisterTextCallback
  .text.IwAssertRegisterCallback
-                0x00002af8       0x1c /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
-                0x00002af8                IwAssertRegisterCallback
+                0x0000300c       0x1c /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+                0x0000300c                IwAssertRegisterCallback
  .text.IwDebugTraceDisable
-                0x00002b14       0x10 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
-                0x00002b14                IwDebugTraceDisable
+                0x00003028       0x10 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+                0x00003028                IwDebugTraceDisable
  .text.IwDebugTraceIsChannelOn
-                0x00002b24      0x27c /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
-                0x00002b24                IwDebugTraceIsChannelOn
+                0x00003038      0x27c /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+                0x00003038                IwDebugTraceIsChannelOn
  .text.IwDebugTraceSetTraceChannel
-                0x00002da0       0x1c /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
-                0x00002da0                IwDebugTraceSetTraceChannel
+                0x000032b4       0x1c /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+                0x000032b4                IwDebugTraceSetTraceChannel
  .text.IwDebugTraceChannelSwitch
-                0x00002dbc      0x1e4 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
-                0x00002dbc                IwDebugTraceChannelSwitch
+                0x000032d0      0x1e4 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+                0x000032d0                IwDebugTraceChannelSwitch
  .text.IwDebugTraceLineVPrintf
-                0x00002fa0       0xfc /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
-                0x00002fa0                IwDebugTraceLineVPrintf
+                0x000034b4       0xfc /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+                0x000034b4                IwDebugTraceLineVPrintf
  .text.IwDebugTraceLinePrintf
-                0x0000309c       0x30 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
-                0x0000309c                IwDebugTraceLinePrintf
+                0x000035b0       0x30 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+                0x000035b0                IwDebugTraceLinePrintf
  .text.IwDebugErrorRegisterCallback
-                0x000030cc       0x1c /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
-                0x000030cc                IwDebugErrorRegisterCallback
+                0x000035e0       0x1c /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+                0x000035e0                IwDebugErrorRegisterCallback
  .text.IwDebugErrorShow
-                0x000030e8      0x108 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
-                0x000030e8                IwDebugErrorShow
+                0x000035fc      0x108 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+                0x000035fc                IwDebugErrorShow
  .text.IwDebugAssertSetUID
-                0x000031f0       0x14 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
-                0x000031f0                IwDebugAssertSetUID
- .text          0x00003204        0x0 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
+                0x00003704       0x14 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+                0x00003704                IwDebugAssertSetUID
+ .text          0x00003718        0x0 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
  .text.s3eEdkErrorSetString
-                0x00003204       0x30 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
-                0x00003204                s3eEdkErrorSetString
+                0x00003718       0x30 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
+                0x00003718                s3eEdkErrorSetString
  .text.s3eEdkThreadRunOnOS
-                0x00003234       0x30 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
-                0x00003234                s3eEdkThreadRunOnOS
+                0x00003748       0x30 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
+                0x00003748                s3eEdkThreadRunOnOS
  .text.s3eEdkThreadRunOnOSAsync
-                0x00003264       0x30 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
-                0x00003264                s3eEdkThreadRunOnOSAsync
- .text          0x00003294       0x44 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_aeabi_ldivmod.o)
-                0x00003294                __aeabi_ldivmod
- .text          0x000032d8       0x10 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_dvmd_lnx.o)
-                0x000032d8                __aeabi_idiv0
-                0x000032d8                __aeabi_ldiv0
- .text          0x000032e8       0x78 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(bpabi.o)
-                0x000032e8                __gnu_ldivmod_helper
-                0x00003324                __gnu_uldivmod_helper
- .text          0x00003360      0xf20 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(unwind-arm.o)
-                0x00003f10                __aeabi_unwind_cpp_pr0
-                0x00003f18                __aeabi_unwind_cpp_pr1
-                0x00003f20                __aeabi_unwind_cpp_pr2
-                0x000037a4                _Unwind_GetCFA
-                0x000037ac                __gnu_Unwind_RaiseException
-                0x00003850                __gnu_Unwind_ForcedUnwind
-                0x0000386c                __gnu_Unwind_Resume
-                0x000038e0                __gnu_Unwind_Resume_or_Rethrow
-                0x00003900                _Unwind_Complete
-                0x00003904                _Unwind_DeleteException
-                0x00003924                _Unwind_VRS_Get
-                0x000039a8                _Unwind_VRS_Set
-                0x00003a30                __gnu_Unwind_Backtrace
-                0x00003f28                _Unwind_VRS_Pop
- .text          0x00004280      0x1a8 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(libunwind.o)
-                0x00004280                __restore_core_regs
-                0x00004280                restore_core_regs
-                0x00004294                __gnu_Unwind_Restore_VFP
-                0x0000429c                __gnu_Unwind_Save_VFP
-                0x000042a4                __gnu_Unwind_Restore_VFP_D
-                0x000042ac                __gnu_Unwind_Save_VFP_D
-                0x000042b4                __gnu_Unwind_Restore_VFP_D_16_to_31
-                0x000042bc                __gnu_Unwind_Save_VFP_D_16_to_31
-                0x000042c4                __gnu_Unwind_Restore_WMMXD
-                0x00004308                __gnu_Unwind_Save_WMMXD
-                0x0000434c                __gnu_Unwind_Restore_WMMXC
-                0x00004360                __gnu_Unwind_Save_WMMXC
-                0x00004374                ___Unwind_RaiseException
-                0x00004374                _Unwind_RaiseException
-                0x00004398                ___Unwind_Resume
-                0x00004398                _Unwind_Resume
-                0x000043bc                ___Unwind_Resume_or_Rethrow
-                0x000043bc                _Unwind_Resume_or_Rethrow
-                0x000043e0                ___Unwind_ForcedUnwind
-                0x000043e0                _Unwind_ForcedUnwind
-                0x00004404                ___Unwind_Backtrace
-                0x00004404                _Unwind_Backtrace
- .text          0x00004428      0x484 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(pr-support.o)
-                0x000044b4                __gnu_unwind_execute
-                0x00004830                __gnu_unwind_frame
-                0x00004870                _Unwind_GetRegionStart
-                0x00004880                _Unwind_GetLanguageSpecificData
-                0x0000489c                _Unwind_GetDataRelBase
-                0x000048a4                _Unwind_GetTextRelBase
- .text          0x000048ac      0x498 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_divdi3.o)
-                0x000048ac                __divdi3
- .text          0x00004d44      0x404 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_udivdi3.o)
-                0x00004d44                __udivdi3
+                0x00003778       0x30 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
+                0x00003778                s3eEdkThreadRunOnOSAsync
+ .text          0x000037a8       0x44 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_aeabi_ldivmod.o)
+                0x000037a8                __aeabi_ldivmod
+ .text          0x000037ec       0x10 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_dvmd_lnx.o)
+                0x000037ec                __aeabi_idiv0
+                0x000037ec                __aeabi_ldiv0
+ .text          0x000037fc       0x78 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(bpabi.o)
+                0x000037fc                __gnu_ldivmod_helper
+                0x00003838                __gnu_uldivmod_helper
+ .text          0x00003874      0xf20 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(unwind-arm.o)
+                0x00004424                __aeabi_unwind_cpp_pr0
+                0x0000442c                __aeabi_unwind_cpp_pr1
+                0x00004434                __aeabi_unwind_cpp_pr2
+                0x00003cb8                _Unwind_GetCFA
+                0x00003cc0                __gnu_Unwind_RaiseException
+                0x00003d64                __gnu_Unwind_ForcedUnwind
+                0x00003d80                __gnu_Unwind_Resume
+                0x00003df4                __gnu_Unwind_Resume_or_Rethrow
+                0x00003e14                _Unwind_Complete
+                0x00003e18                _Unwind_DeleteException
+                0x00003e38                _Unwind_VRS_Get
+                0x00003ebc                _Unwind_VRS_Set
+                0x00003f44                __gnu_Unwind_Backtrace
+                0x0000443c                _Unwind_VRS_Pop
+ .text          0x00004794      0x1a8 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(libunwind.o)
+                0x00004794                __restore_core_regs
+                0x00004794                restore_core_regs
+                0x000047a8                __gnu_Unwind_Restore_VFP
+                0x000047b0                __gnu_Unwind_Save_VFP
+                0x000047b8                __gnu_Unwind_Restore_VFP_D
+                0x000047c0                __gnu_Unwind_Save_VFP_D
+                0x000047c8                __gnu_Unwind_Restore_VFP_D_16_to_31
+                0x000047d0                __gnu_Unwind_Save_VFP_D_16_to_31
+                0x000047d8                __gnu_Unwind_Restore_WMMXD
+                0x0000481c                __gnu_Unwind_Save_WMMXD
+                0x00004860                __gnu_Unwind_Restore_WMMXC
+                0x00004874                __gnu_Unwind_Save_WMMXC
+                0x00004888                ___Unwind_RaiseException
+                0x00004888                _Unwind_RaiseException
+                0x000048ac                ___Unwind_Resume
+                0x000048ac                _Unwind_Resume
+                0x000048d0                ___Unwind_Resume_or_Rethrow
+                0x000048d0                _Unwind_Resume_or_Rethrow
+                0x000048f4                ___Unwind_ForcedUnwind
+                0x000048f4                _Unwind_ForcedUnwind
+                0x00004918                ___Unwind_Backtrace
+                0x00004918                _Unwind_Backtrace
+ .text          0x0000493c      0x484 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(pr-support.o)
+                0x000049c8                __gnu_unwind_execute
+                0x00004d44                __gnu_unwind_frame
+                0x00004d84                _Unwind_GetRegionStart
+                0x00004d94                _Unwind_GetLanguageSpecificData
+                0x00004db0                _Unwind_GetDataRelBase
+                0x00004db8                _Unwind_GetTextRelBase
+ .text          0x00004dc0      0x498 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_divdi3.o)
+                0x00004dc0                __divdi3
+ .text          0x00005258      0x404 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_udivdi3.o)
+                0x00005258                __udivdi3
  .text          0xffffffffffffffff       0xc8 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_udivsi3.o)
-                0x00005148                __udivsi3
-                0x00005148                __aeabi_uidiv
-                0x000051f0                __aeabi_uidivmod
- .text          0x00005210        0x0 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtend_so.o
+                0x0000565c                __udivsi3
+                0x0000565c                __aeabi_uidiv
+                0x00005704                __aeabi_uidivmod
+ .text          0x00005724        0x0 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtend_so.o
 
-.rodata         0x00005210      0x392
- .rodata        0x00005210       0xf4 debug/CGAdMob_platform.os
- .rodata        0x00005304      0x184 debug/CGAdMob_register.os
+.rodata         0x00005724      0x492
+ .rodata        0x00005724      0x150 debug/CGAdMob_platform.os
+ .rodata        0x00005874      0x228 debug/CGAdMob_register.os
  ** merge strings
-                0x00005488      0x11a
+                0x00005a9c      0x11a
 
-.ARM.extab      0x000055a4       0x48
- .ARM.extab     0x000055a4        0xc /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_dvmd_lnx.o)
- .ARM.extab     0x000055b0        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(bpabi.o)
- .ARM.extab     0x000055b0        0xc /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(unwind-arm.o)
- .ARM.extab     0x000055bc       0x30 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(pr-support.o)
- .ARM.extab     0x000055ec        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_divdi3.o)
- .ARM.extab     0x000055ec        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_udivdi3.o)
+.ARM.extab      0x00005bb8       0x48
+ .ARM.extab     0x00005bb8        0xc /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_dvmd_lnx.o)
+ .ARM.extab     0x00005bc4        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(bpabi.o)
+ .ARM.extab     0x00005bc4        0xc /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(unwind-arm.o)
+ .ARM.extab     0x00005bd0       0x30 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(pr-support.o)
+ .ARM.extab     0x00005c00        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_divdi3.o)
+ .ARM.extab     0x00005c00        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_udivdi3.o)
 
-.ARM.exidx      0x000055ec      0x128
- .ARM.exidx     0x000055ec        0x8 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_dvmd_lnx.o)
+.ARM.exidx      0x00005c00      0x128
+ .ARM.exidx     0x00005c00        0x8 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_dvmd_lnx.o)
  .ARM.exidx     0xffffffffffffffff       0x10 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(bpabi.o)
  .ARM.exidx     0xffffffffffffffff       0xd8 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(unwind-arm.o)
  ** ARM cantunwind
-                0x000056ac        0x8
- .ARM.exidx     0x000056b4       0x48 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(pr-support.o)
- .ARM.exidx     0x000056fc        0x8 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_divdi3.o)
- .ARM.exidx     0x00005704        0x8 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_udivdi3.o)
+                0x00005cc0        0x8
+ .ARM.exidx     0x00005cc8       0x48 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(pr-support.o)
+ .ARM.exidx     0x00005d10        0x8 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_divdi3.o)
+ .ARM.exidx     0x00005d18        0x8 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_udivdi3.o)
  ** ARM cantunwind
-                0x0000570c        0x8
+                0x00005d20        0x8
 
-.fini_array     0x00006e2c        0x8
- .fini_array    0x00006e2c        0x4 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtbegin_so.o
- .fini_array    0x00006e30        0x4 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtend_so.o
+.fini_array     0x00006e20        0x8
+ .fini_array    0x00006e20        0x4 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtbegin_so.o
+ .fini_array    0x00006e24        0x4 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtend_so.o
 
-.init_array     0x00006e34        0x8
- .init_array    0x00006e34        0x4 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
- .init_array    0x00006e38        0x4 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtend_so.o
+.init_array     0x00006e28        0x8
+ .init_array    0x00006e28        0x4 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+ .init_array    0x00006e2c        0x4 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtend_so.o
 
-.dynamic        0x00006e3c      0x100
- ** dynamic     0x00006e3c      0x100
+.dynamic        0x00006e30      0x100
+ ** dynamic     0x00006e30      0x100
 
-.got            0x00006f3c       0xc4
- ** GOT         0x00006f3c       0x40
+.got            0x00006f30       0xd0
+ ** GOT         0x00006f30       0x4c
  ** GOT PLT     0x00006f7c       0x84
 
 .data           0x00007000        0x4
@@ -353,21 +359,21 @@ Memory map
  .data          0x00007004        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_udivsi3.o)
  .data          0x00007004        0x0 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtend_so.o
 
-.bss            0x00007004     0x1a48
+.bss            0x00007004     0x1a54
  .bss           0x00007004        0x0 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtbegin_so.o
- .bss           0x00007004       0x20 debug/CGAdMob_platform.os
- .bss           0x00007024        0x0 debug/CGAdMob.os
- .bss           0x00007024        0x0 debug/CGAdMob_register.os
- .bss           0x00007024     0x1a28 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
-                0x00007024                g_DebugGlobals
- .bss           0x00008a4c        0x0 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
- .bss           0x00008a4c        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_aeabi_ldivmod.o)
- .bss           0x00008a4c        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_dvmd_lnx.o)
- .bss           0x00008a4c        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(bpabi.o)
- .bss           0x00008a4c        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(unwind-arm.o)
- .bss           0x00008a4c        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(libunwind.o)
- .bss           0x00008a4c        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(pr-support.o)
- .bss           0x00008a4c        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_divdi3.o)
- .bss           0x00008a4c        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_udivdi3.o)
- .bss           0x00008a4c        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_udivsi3.o)
- .bss           0x00008a4c        0x0 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtend_so.o
+ .bss           0x00007004       0x2c debug/CGAdMob_platform.os
+ .bss           0x00007030        0x0 debug/CGAdMob.os
+ .bss           0x00007030        0x0 debug/CGAdMob_register.os
+ .bss           0x00007030     0x1a28 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(IwDebug.o)
+                0x00007030                g_DebugGlobals
+ .bss           0x00008a58        0x0 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
+ .bss           0x00008a58        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_aeabi_ldivmod.o)
+ .bss           0x00008a58        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_dvmd_lnx.o)
+ .bss           0x00008a58        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(bpabi.o)
+ .bss           0x00008a58        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(unwind-arm.o)
+ .bss           0x00008a58        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(libunwind.o)
+ .bss           0x00008a58        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(pr-support.o)
+ .bss           0x00008a58        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_divdi3.o)
+ .bss           0x00008a58        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_udivdi3.o)
+ .bss           0x00008a58        0x0 /Users/adriangomez/android-ndk-r9d/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.8/libgcc.a(_udivsi3.o)
+ .bss           0x00008a58        0x0 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtend_so.o

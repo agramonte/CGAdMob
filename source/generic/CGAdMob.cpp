@@ -53,6 +53,21 @@ void BannerAdHide()
 	BannerAdHide_platform();
 }
 
+void IsLandscape(bool landscape)
+{
+	IsLandscape_platform(landscape);
+}
+
+void BannerAdPosition(int x, int y)
+{
+	BannerAdPosition_platform(x, y);
+}
+
+void TestDeviceHashedId(const char* deviceHashId)
+{
+	TestDeviceHashedId_platform(deviceHashId);
+}
+
 void Release()
 {
 	Release_platform();

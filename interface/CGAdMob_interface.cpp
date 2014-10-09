@@ -28,6 +28,9 @@ typedef       void(*SetGoogleAppKey_t)(const char* bannerAdUnitId, const char* i
 typedef       void(*BannerAdLoad_t)();
 typedef       void(*BannerAdShow_t)();
 typedef       void(*BannerAdHide_t)();
+typedef       void(*IsLandscape_t)(bool landscape);
+typedef       void(*BannerAdPosition_t)(int x, int y);
+typedef       void(*TestDeviceHashedId_t)(const char* deviceHashId);
 typedef       void(*Release_t)();
 
 /**
@@ -41,6 +44,9 @@ typedef struct CGAdMobFuncs
     BannerAdLoad_t m_BannerAdLoad;
     BannerAdShow_t m_BannerAdShow;
     BannerAdHide_t m_BannerAdHide;
+    IsLandscape_t m_IsLandscape;
+    BannerAdPosition_t m_BannerAdPosition;
+    TestDeviceHashedId_t m_TestDeviceHashedId;
     Release_t m_Release;
 } CGAdMobFuncs;
 
@@ -207,9 +213,69 @@ void BannerAdHide()
     return;
 }
 
+void IsLandscape(bool landscape)
+{
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[6] func: IsLandscape"));
+
+    if (!_extLoad())
+        return;
+
+#ifdef LOADER_CALL_LOCK
+    s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
+#endif
+
+    g_Ext.m_IsLandscape(landscape);
+
+#ifdef LOADER_CALL_LOCK
+    s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
+#endif
+
+    return;
+}
+
+void BannerAdPosition(int x, int y)
+{
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[7] func: BannerAdPosition"));
+
+    if (!_extLoad())
+        return;
+
+#ifdef LOADER_CALL_LOCK
+    s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
+#endif
+
+    g_Ext.m_BannerAdPosition(x, y);
+
+#ifdef LOADER_CALL_LOCK
+    s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
+#endif
+
+    return;
+}
+
+void TestDeviceHashedId(const char* deviceHashId)
+{
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[8] func: TestDeviceHashedId"));
+
+    if (!_extLoad())
+        return;
+
+#ifdef LOADER_CALL_LOCK
+    s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
+#endif
+
+    g_Ext.m_TestDeviceHashedId(deviceHashId);
+
+#ifdef LOADER_CALL_LOCK
+    s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
+#endif
+
+    return;
+}
+
 void Release()
 {
-    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[6] func: Release"));
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[9] func: Release"));
 
     if (!_extLoad())
         return;

@@ -4,7 +4,7 @@
 # tool during the build process.
 
 config = {}
-cmdline = ['/Applications/Marmalade.app/Contents/s3e/makefile_builder/mkb.py', '/Users/adriangomez/OneDrive/Development/CGAdmobExample/CGAdmobExample.mkb', '--buildenv=XCODE', '--test-assets', 'Default', '--deploy-only']
+cmdline = ['/Applications/Marmalade.app/Contents/s3e/makefile_builder/mkb.py', '/Users/adriangomez/OneDrive/Development/CGAdmobExample/CGAdmobExample.mkb', '--buildenv=XCODE', '--debug', '--arm', '--compiler=gcc', '--no-ide', '--execute', '--deploy-only']
 mkb = '/Users/adriangomez/OneDrive/Development/CGAdmobExample/CGAdmobExample.mkb'
 mkf = ['/Applications/Marmalade.app/Contents/s3e/s3e-default.mkf', '/Applications/Marmalade.app/Contents/modules/iwutil/iwutil.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/libjpeg/libjpeg.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/libpng/libpng.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/zlib/zlib.mkf', '/Applications/Marmalade.app/Contents/modules/iwgl/iwgl.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/cocos2dx/proj.marmalade/cocos2dx.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/cocos2dx/platform/third_party/marmalade/libxml2.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/cocos2dx/platform/third_party/marmalade/freetype.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/cocos2dx/platform/third_party/marmalade/libtiff/libtiff.mkf', '/Applications/Marmalade.app/Contents/modules/third_party/cocos2dx/external/Box2D/proj.marmalade/Box2D.mkf', '/Users/adriangomez/OneDrive/Development/CGAdMob/CGAdMob.mkf']
 

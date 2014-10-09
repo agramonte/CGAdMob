@@ -54,6 +54,12 @@ void BannerAdShow_platform();
 
 void BannerAdHide_platform();
 
+void IsLandscape_platform(bool landscape);
+
+void BannerAdPosition_platform(int x, int y);
+
+void TestDeviceHashedId_platform(const char* deviceHashId);
+
 void Release_platform();
 
 

@@ -58,6 +58,21 @@ void BannerAdShow();
 void BannerAdHide();
 
 /**
+ * Optional: True to display banner ad in Landscape mode. Default is false.
+ */
+void IsLandscape(bool landscape);
+
+/**
+* Optional: If not called banner will display at the top.
+*/
+void BannerAdPosition(int x, int y);
+
+/**
+* Optional: Sets the test device string.
+*/
+void TestDeviceHashedId(const char* deviceHashId);
+
+/**
  * Release any resources.
  */
 void Release();

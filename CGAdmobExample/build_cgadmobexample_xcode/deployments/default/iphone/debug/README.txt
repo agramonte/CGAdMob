@@ -3,7 +3,7 @@ This folder contains an application deployed using the Marmalade SDK.
     Application : CGAdmobExample
         Version : 0.0.1
     SDK Version : 7.4.1 [402483]
-  Date Deployed : Tue Oct  7 12:15:34 2014
+  Date Deployed : Wed Oct  8 10:42:22 2014
       Target OS : iphone (iOS (iPhone, iPad, iPod))
   Configuration : Debug
 

@@ -41,82 +41,88 @@ Memory map
 .hash           0x000002fc       0x44
  ** hash        0x000002fc       0x44
 
-.rel.dyn        0x00000340       0x50
+.rel.dyn        0x00000340       0x68
  ** dynamic relocs
-                0x00000340       0x50
+                0x00000340       0x68
 
-.rel.plt        0x00000390       0x38
+.rel.plt        0x000003a8       0x38
  ** dynamic relocs
-                0x00000390       0x38
+                0x000003a8       0x38
 
-.plt            0x000003c8       0x68
- ** PLT         0x000003c8       0x68
+.plt            0x000003e0       0x68
+ ** PLT         0x000003e0       0x68
 
-.text           0x00000430      0xa28
- .text.exit     0x00000430       0x10 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtbegin_so.o
-                0x00000430                __on_dlclose
- .text          0x00000440       0x14 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtbegin_so.o
-                0x00000440                atexit
- .text          0x00000454      0x5e0 release/CGAdMob_platform.os
-                0x0000050c                CGAdMobInit_platform()
-                0x000007b8                CGAdMobTerminate_platform()
-                0x000007bc                InitAdView_platform()
-                0x0000080c                ShowInterstitialAd_platform()
-                0x00000864                SetGoogleAppKey_platform(char const*, char const*)
-                0x000008f4                BannerAdLoad_platform()
-                0x00000944                BannerAdShow_platform()
-                0x00000994                BannerAdHide_platform()
-                0x000009e4                Release_platform()
+.text           0x00000448      0xd70
+ .text.exit     0x00000448       0x10 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtbegin_so.o
+                0x00000448                __on_dlclose
+ .text          0x00000458       0x14 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtbegin_so.o
+                0x00000458                atexit
+ .text          0x0000046c      0x834 release/CGAdMob_platform.os
+                0x00000524                CGAdMobInit_platform()
+                0x000008a8                CGAdMobTerminate_platform()
+                0x00000900                InitAdView_platform()
+                0x00000950                ShowInterstitialAd_platform()
+                0x000009a8                SetGoogleAppKey_platform(char const*, char const*)
+                0x00000a38                BannerAdLoad_platform()
+                0x00000a88                BannerAdShow_platform()
+                0x00000ad8                BannerAdHide_platform()
+                0x00000b28                IsLandscape_platform(bool)
+                0x00000b80                BannerAdPosition_platform(int, int)
+                0x00000be0                TestDeviceHashedId_platform(char const*)
+                0x00000c50                Release_platform()
  .text._ZN7_JNIEnv9NewObjectEP7_jclassP10_jmethodIDz
-                0x00000a34       0x38 release/CGAdMob_platform.os
-                0x00000a34                _JNIEnv::NewObject(_jclass*, _jmethodID*, ...)
+                0x00000ca0       0x38 release/CGAdMob_platform.os
+                0x00000ca0                _JNIEnv::NewObject(_jclass*, _jmethodID*, ...)
  .text._ZN7_JNIEnv17CallBooleanMethodEP8_jobjectP10_jmethodIDz
-                0x00000a6c       0x38 release/CGAdMob_platform.os
-                0x00000a6c                _JNIEnv::CallBooleanMethod(_jobject*, _jmethodID*, ...)
+                0x00000cd8       0x38 release/CGAdMob_platform.os
+                0x00000cd8                _JNIEnv::CallBooleanMethod(_jobject*, _jmethodID*, ...)
  .text._ZN7_JNIEnv14CallVoidMethodEP8_jobjectP10_jmethodIDz
-                0x00000aa4       0x38 release/CGAdMob_platform.os
-                0x00000aa4                _JNIEnv::CallVoidMethod(_jobject*, _jmethodID*, ...)
- .text          0x00000adc       0x24 release/CGAdMob.os
-                0x00000adc                CGAdMobInit()
-                0x00000ae0                CGAdMobTerminate()
-                0x00000ae4                InitAdView
-                0x00000ae8                ShowInterstitialAd
-                0x00000aec                SetGoogleAppKey
-                0x00000af0                BannerAdLoad
-                0x00000af4                BannerAdShow
-                0x00000af8                BannerAdHide
-                0x00000afc                Release
- .text          0x00000b00      0x2c8 release/CGAdMob_register.os
-                0x00000bf8                CGAdMobRegisterExt()
-                0x00000ce0                RegisterExt
- .text          0x00000dc8        0x0 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
+                0x00000d10       0x38 release/CGAdMob_platform.os
+                0x00000d10                _JNIEnv::CallVoidMethod(_jobject*, _jmethodID*, ...)
+ .text          0x00000d48       0x30 release/CGAdMob.os
+                0x00000d48                CGAdMobInit()
+                0x00000d4c                CGAdMobTerminate()
+                0x00000d50                InitAdView
+                0x00000d54                ShowInterstitialAd
+                0x00000d58                SetGoogleAppKey
+                0x00000d5c                BannerAdLoad
+                0x00000d60                BannerAdShow
+                0x00000d64                BannerAdHide
+                0x00000d68                IsLandscape
+                0x00000d6c                BannerAdPosition
+                0x00000d70                TestDeviceHashedId
+                0x00000d74                Release
+ .text          0x00000d78      0x3b0 release/CGAdMob_register.os
+                0x00000ee0                CGAdMobRegisterExt()
+                0x00001004                RegisterExt
+ .text          0x00001128        0x0 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
  .text.s3eEdkErrorSetString
-                0x00000dc8       0x30 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
-                0x00000dc8                s3eEdkErrorSetString
+                0x00001128       0x30 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
+                0x00001128                s3eEdkErrorSetString
  .text.s3eEdkThreadRunOnOS
-                0x00000df8       0x30 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
-                0x00000df8                s3eEdkThreadRunOnOS
+                0x00001158       0x30 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
+                0x00001158                s3eEdkThreadRunOnOS
  .text.s3eEdkThreadRunOnOSAsync
                 0xffffffffffffffff       0x30 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
-                0x00000e28                s3eEdkThreadRunOnOSAsync
- .text          0x00000e58        0x0 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtend_so.o
+                0x00001188                s3eEdkThreadRunOnOSAsync
+ .text          0x000011b8        0x0 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtend_so.o
 
-.rodata         0x00000e58       0xa8
+.rodata         0x000011b8      0x104
  ** merge strings
-                0x00000e58       0xa8
+                0x000011b8      0x104
 
-.fini_array     0x00002ea8        0x8
- .fini_array    0x00002ea8        0x4 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtbegin_so.o
- .fini_array    0x00002eac        0x4 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtend_so.o
+.fini_array     0x00002e9c        0x8
+ .fini_array    0x00002e9c        0x4 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtbegin_so.o
+ .fini_array    0x00002ea0        0x4 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtend_so.o
 
-.init_array     0x00002eb0        0x4
- .init_array    0x00002eb0        0x4 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtend_so.o
+.init_array     0x00002ea4        0x4
+ .init_array    0x00002ea4        0x4 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtend_so.o
 
-.dynamic        0x00002eb4      0x100
- ** dynamic     0x00002eb4      0x100
+.dynamic        0x00002ea8      0x100
+ ** dynamic     0x00002ea8      0x100
 
-.got            0x00002fb4       0x4c
- ** GOT         0x00002fb4       0x24
+.got            0x00002fa8       0x58
+ ** GOT         0x00002fa8       0x30
  ** GOT PLT     0x00002fd8       0x28
 
 .data           0x00003000        0x4
@@ -128,10 +134,10 @@ Memory map
  .data          0x00003004        0x0 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
  .data          0x00003004        0x0 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtend_so.o
 
-.bss            0x00003004       0x20
+.bss            0x00003004       0x2c
  .bss           0x00003004        0x0 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtbegin_so.o
- .bss           0x00003004       0x20 release/CGAdMob_platform.os
- .bss           0x00003024        0x0 release/CGAdMob.os
- .bss           0x00003024        0x0 release/CGAdMob_register.os
- .bss           0x00003024        0x0 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
- .bss           0x00003024        0x0 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtend_so.o
+ .bss           0x00003004       0x2c release/CGAdMob_platform.os
+ .bss           0x00003030        0x0 release/CGAdMob.os
+ .bss           0x00003030        0x0 release/CGAdMob_register.os
+ .bss           0x00003030        0x0 /Applications/Marmalade.app/Contents/s3e/edk/lib/android/libedk.a(edk_helpers.o)
+ .bss           0x00003030        0x0 /Users/adriangomez/android-ndk-r9d/platforms/android-14/arch-arm/usr/lib/crtend_so.o

@@ -60,6 +60,24 @@ static void BannerAdHide_wrap()
     s3eEdkThreadRunOnOS((s3eEdkThreadFunc)BannerAdHide, 0);
 }
 
+static void IsLandscape_wrap(bool landscape)
+{
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob func on main thread: IsLandscape"));
+    s3eEdkThreadRunOnOS((s3eEdkThreadFunc)IsLandscape, 1, landscape);
+}
+
+static void BannerAdPosition_wrap(int x, int y)
+{
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob func on main thread: BannerAdPosition"));
+    s3eEdkThreadRunOnOS((s3eEdkThreadFunc)BannerAdPosition, 2, x, y);
+}
+
+static void TestDeviceHashedId_wrap(const char* deviceHashId)
+{
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob func on main thread: TestDeviceHashedId"));
+    s3eEdkThreadRunOnOS((s3eEdkThreadFunc)TestDeviceHashedId, 1, deviceHashId);
+}
+
 static void Release_wrap()
 {
     IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob func on main thread: Release"));
@@ -72,6 +90,9 @@ static void Release_wrap()
 #define BannerAdLoad BannerAdLoad_wrap
 #define BannerAdShow BannerAdShow_wrap
 #define BannerAdHide BannerAdHide_wrap
+#define IsLandscape IsLandscape_wrap
+#define BannerAdPosition BannerAdPosition_wrap
+#define TestDeviceHashedId TestDeviceHashedId_wrap
 #define Release Release_wrap
 
 #endif
@@ -79,19 +100,22 @@ static void Release_wrap()
 void CGAdMobRegisterExt()
 {
     /* fill in the function pointer struct for this extension */
-    void* funcPtrs[7];
+    void* funcPtrs[10];
     funcPtrs[0] = (void*)InitAdView;
     funcPtrs[1] = (void*)ShowInterstitialAd;
     funcPtrs[2] = (void*)SetGoogleAppKey;
     funcPtrs[3] = (void*)BannerAdLoad;
     funcPtrs[4] = (void*)BannerAdShow;
     funcPtrs[5] = (void*)BannerAdHide;
-    funcPtrs[6] = (void*)Release;
+    funcPtrs[6] = (void*)IsLandscape;
+    funcPtrs[7] = (void*)BannerAdPosition;
+    funcPtrs[8] = (void*)TestDeviceHashedId;
+    funcPtrs[9] = (void*)Release;
 
     /*
      * Flags that specify the extension's use of locking and stackswitching
      */
-    int flags[7] = { 0 };
+    int flags[10] = { 0 };
 
     /*
      * Register the extension

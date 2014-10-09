@@ -20,6 +20,9 @@ static jmethodID g_SetGoogleAppKey;
 static jmethodID g_BannerAdLoad;
 static jmethodID g_BannerAdShow;
 static jmethodID g_BannerAdHide;
+static jmethodID g_IsLandscape;
+static jmethodID g_BannerAdPosition;
+static jmethodID g_TestDeviceHashedId;
 static jmethodID g_Release;
 
 s3eResult CGAdMobInit_platform()
@@ -69,6 +72,18 @@ s3eResult CGAdMobInit_platform()
     if (!g_BannerAdHide)
         goto fail;
 
+    g_IsLandscape = env->GetMethodID(cls, "IsLandscape", "(Z)V");
+    if (!g_IsLandscape)
+        goto fail;
+
+    g_BannerAdPosition = env->GetMethodID(cls, "BannerAdPosition", "(II)V");
+    if (!g_BannerAdPosition)
+        goto fail;
+
+    g_TestDeviceHashedId = env->GetMethodID(cls, "TestDeviceHashedId", "(Ljava/lang/String;)V");
+    if (!g_TestDeviceHashedId)
+        goto fail;
+
     g_Release = env->GetMethodID(cls, "Release", "()V");
     if (!g_Release)
         goto fail;
@@ -91,13 +106,19 @@ fail:
         env->ExceptionClear();
         IwTrace(CGAdMob, ("One or more java methods could not be found"));
     }
+
+    env->DeleteLocalRef(obj);
+    env->DeleteGlobalRef(cls);
     return S3E_RESULT_ERROR;
 
 }
 
 void CGAdMobTerminate_platform()
-{
+{ 
     // Add any platform-specific termination code here
+    JNIEnv* env = s3eEdkJNIGetEnv();
+    env->DeleteGlobalRef(g_Obj);
+    g_Obj = NULL;
 }
 
 void InitAdView_platform()
@@ -136,6 +157,25 @@ void BannerAdHide_platform()
 {
     JNIEnv* env = s3eEdkJNIGetEnv();
     env->CallVoidMethod(g_Obj, g_BannerAdHide);
+}
+
+void IsLandscape_platform(bool landscape)
+{
+    JNIEnv* env = s3eEdkJNIGetEnv();
+    env->CallVoidMethod(g_Obj, g_IsLandscape, landscape);
+}
+
+void BannerAdPosition_platform(int x, int y)
+{
+    JNIEnv* env = s3eEdkJNIGetEnv();
+    env->CallVoidMethod(g_Obj, g_BannerAdPosition, x, y);
+}
+
+void TestDeviceHashedId_platform(const char* deviceHashId)
+{
+    JNIEnv* env = s3eEdkJNIGetEnv();
+    jstring deviceHashId_jstr = env->NewStringUTF(deviceHashId);
+    env->CallVoidMethod(g_Obj, g_TestDeviceHashedId, deviceHashId_jstr);
 }
 
 void Release_platform()

@@ -28,9 +28,9 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>10.7.16.15.30</string>
+	<string>10.8.14.42.18</string>
 	<key>CFBundleShortVersionString</key>
-	<string>10.7.16.15.30</string>
+	<string>10.8.14.42.18</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>MinimumOSVersion</key>

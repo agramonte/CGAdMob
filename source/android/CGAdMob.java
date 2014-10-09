@@ -26,51 +26,59 @@ class CGAdMob
 
         //Logging
     private String logTag = "marmalade";
-    private String versionNumber = "Version: 1.0.01";
+    private String versionNumber = "Version: 1.0.03";
 	private String _bannerAdUnitId = "";
     private String _interstatialAdUnitId = "";
 	private RelativeLayout.LayoutParams _lp;
+    private boolean _isLandscape = false;
+    private String _testDeviceHashId = "";
+    private boolean _showAtBottom = false;
     
     
     
 
     public void InitAdView()
     {
-        Log.e(logTag, versionNumber);
+        Log.w(logTag, versionNumber);
 
 	        //Create LayoutParams.
-        _lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        this._lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        
 
-        _setGoogleAds();
+        this._setGoogleAds();
 		        
     }
+    
     public boolean ShowInterstitialAd()
     {
-        if (_mInterstitialAd.isLoaded()) {
+        boolean adLoaded = false;
+        
+        if (this._mInterstitialAd.isLoaded()) {
             
-            _mInterstitialAd.show();
-            AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
-            _mInterstitialAd.loadAd(adRequestBuilder.build());
-            
-            return true;
-        } else {
-            AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
-            _mInterstitialAd.loadAd(adRequestBuilder.build());
-            return  false;
+            this._mInterstitialAd.show();
+            adLoaded = true;
         }
         
+        //TODO: Ad events and make this call on fail instead of every time.
+        AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
+        adRequestBuilder.addTestDevice(_testDeviceHashId);
         
+        this._mInterstitialAd.loadAd(adRequestBuilder.build());
+        
+        
+        return adLoaded;
         
     }
     public void SetGoogleAppKey(String bannerAdUnitId, String interstatialAdUnitId)
     {
-        _interstatialAdUnitId = interstatialAdUnitId;
-        _bannerAdUnitId = bannerAdUnitId;
+        this._interstatialAdUnitId = interstatialAdUnitId;
+        this._bannerAdUnitId = bannerAdUnitId;
     }
     public void BannerAdLoad()
     {
-        AdRequest adRequest = new AdRequest.Builder().build();
-        this._googleAdView.loadAd(adRequest);
+        AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
+        adRequestBuilder.addTestDevice(_testDeviceHashId);
+        this._googleAdView.loadAd(adRequestBuilder.build());
     }
     public void BannerAdShow()
     {
@@ -106,33 +114,73 @@ class CGAdMob
         }
         
     }
-    public void Release()
-    {
-         _googleAdView.destroy();
-    }
-
+    
+    
     private void _setGoogleAds(){
         
         
-            this._googleAdView = new AdView(LoaderActivity.m_Activity);
-            this._googleAdView.setAdUnitId(_bannerAdUnitId);
-            this._googleAdView.setAdSize(com.google.android.gms.ads.AdSize.BANNER);
+        //Set up google banner.
+        RelativeLayout adLayout = new RelativeLayout(LoaderActivity.m_Activity);
         
-            this._mInterstitialAd = new InterstitialAd(LoaderActivity.m_Activity);
-            this._mInterstitialAd.setAdUnitId(_interstatialAdUnitId);
+        this._googleAdView = new AdView(LoaderActivity.m_Activity);
+        this._googleAdView.setAdUnitId(_bannerAdUnitId);
+        this._googleAdView.setAdSize(AdSize.SMART_BANNER);
         
-            AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
-            _mInterstitialAd.loadAd(adRequestBuilder.build());
-
-            this._googleAdView.setLayoutParams(_lp);
+        this._googleAdView.setLayoutParams(_lp);
+        adLayout.addView(_googleAdView);
+        
+        //Set up interstatial.
+        this._mInterstitialAd = new InterstitialAd(LoaderActivity.m_Activity);
+        this._mInterstitialAd.setAdUnitId(_interstatialAdUnitId);
+        
+        //Request the first interstitial ad. So that on request it is ready.
+        AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
+        adRequestBuilder.addTestDevice(_testDeviceHashId);
+        this._mInterstitialAd.loadAd(adRequestBuilder.build());
+        
+        
+        
+        try {
             
-            try {
-                LoaderActivity.m_Activity.addContentView(_googleAdView, _lp);
+            if(this._showAtBottom){
+                _lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+           }
+            
+            
+            LoaderActivity.m_Activity.addContentView(adLayout, _lp);
                 
-            } catch (final Exception e) {
-                Log.e(logTag, "Init Google view ex. thrown: " + e.toString());
-                return;
-            }
+        } catch (final Exception e) {
+            Log.e(logTag, "Init Google view ex. thrown: " + e.toString());
+            return;
+        }
+        
+    }    
+
+    public void IsLandscape(boolean landscape)
+    {
+        this._isLandscape = landscape;
+    }
+    
+    public void BannerAdPosition(int x, int y)
+    {
+        if (y != 0)
+        {
+            this._showAtBottom = true;
+        } else
+        {
+            this._showAtBottom = false;
+        }
+        
+        
+    }
+               
+    public void TestDeviceHashedId(String deviceHashId)
+    {
+        this._testDeviceHashId = deviceHashId;
+    }
+               
+    public void Release()
+    {
         
     }
 }
