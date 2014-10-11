@@ -20,9 +20,9 @@ mkf = deploy_config.mkf
 assets = deploy_config.assets
 
 class HubConfig(deploy_config.DefaultConfig):
-    android_icon_group = {}
-    android_install_location = 1
-    android_pkgname = r"com.cabagomez.com.CGAdmobExample"
+    iphone_application_type = "universal"
+    iphone_appid = ur"com.cabagomez.com.CGAdmobExample"
+    iphone_minimum_ios_version = ur"5.0"
     assets = assets["Default"]
     config = [ur"/Users/adriangomez/OneDrive/Development/CGAdmobExample/data/app.icf"]
     name = ur"CGAdmobExample"
@@ -30,10 +30,7 @@ class HubConfig(deploy_config.DefaultConfig):
     provider = ur"cabagomez.com"
     copyright = ur"(C) cabagomez.com"
     version = [0, 0, 1]
-    android_keystore = r"/Users/adriangomez/Dropbox/Development/~keys/Android/tictaczoo.keystore"
-    android_storepass = r"emma2136"
-    android_aliasname = r"tictaczookey"
-    android_keypass = r"emma2136"
+    iphone_region = ur"English"
     pass
 
 default = HubConfig()

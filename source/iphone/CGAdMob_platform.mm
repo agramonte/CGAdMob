@@ -174,8 +174,9 @@ CGAdMob *intAd = [[CGAdMob alloc] autorelease];
 
 const char* _bannerAdUnitId = "";
 const char* _interstatialAdUnitId = "";
+const char* _testDeviceHashId = "";
 bool _landscape = false;
-bool _displayBannerAdBottom = false;
+bool _displayBannerAtBottom = false;
 
 
 s3eResult CGAdMobInit_platform()
@@ -193,7 +194,7 @@ void InitAdView_platform()
     //Start the banner ads
     if (_landscape) {
         
-        if (_displayBannerAdBottom) {
+        if (_displayBannerAtBottom) {
             
             CGSize adSize = CGSizeFromGADAdSize(kGADAdSizeSmartBannerLandscape);
             
@@ -206,7 +207,7 @@ void InitAdView_platform()
         
     } else
     {
-        if (_displayBannerAdBottom) {
+        if (_displayBannerAtBottom) {
             
             CGSize adSize = CGSizeFromGADAdSize(kGADAdSizeSmartBannerPortrait);
             
@@ -219,6 +220,8 @@ void InitAdView_platform()
         }
     }
     
+
+    intAd.deviceHashId = [[NSString alloc] initWithUTF8String:_testDeviceHashId];
     intAd.bannerView.adUnitID = [[NSString alloc] initWithUTF8String:_bannerAdUnitId];
     intAd.bannerView.rootViewController = s3eEdkGetUIViewController();
     
@@ -266,12 +269,12 @@ void IsLandscape_platform(bool landscape)
 
 void BannerAdPosition_platform(int x, int y)
 {
-    _displayBannerAdBottom = true;
+    _displayBannerAtBottom = true;
 }
 
 void TestDeviceHashedId_platform(const char* deviceHashId)
 {
-    intAd.deviceHashId = [[NSString alloc] initWithUTF8String:deviceHashId];
+    _testDeviceHashId = deviceHashId;
 }
 
 void Release_platform()
