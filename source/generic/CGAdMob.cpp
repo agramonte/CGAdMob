@@ -28,7 +28,7 @@ void InitAdView()
 	InitAdView_platform();
 }
 
-bool ShowInterstitialAd()
+s3eResult ShowInterstitialAd()
 {
 	ShowInterstitialAd_platform();
 }
@@ -58,9 +58,9 @@ void IsLandscape(bool landscape)
 	IsLandscape_platform(landscape);
 }
 
-void BannerAdPosition(int x, int y)
+void BannerAdPosition(CGAdMobPosition position)
 {
-	BannerAdPosition_platform(x, y);
+	BannerAdPosition_platform(position);
 }
 
 void TestDeviceHashedId(const char* deviceHashId)

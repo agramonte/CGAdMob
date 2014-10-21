@@ -44,7 +44,7 @@ void CGAdMobTerminate();
 void CGAdMobTerminate_platform();
 void InitAdView_platform();
 
-bool ShowInterstitialAd_platform();
+s3eResult ShowInterstitialAd_platform();
 
 void SetGoogleAppKey_platform(const char* bannerAdUnitId, const char* interstatialAdUnitId);
 
@@ -56,7 +56,7 @@ void BannerAdHide_platform();
 
 void IsLandscape_platform(bool landscape);
 
-void BannerAdPosition_platform(int x, int y);
+void BannerAdPosition_platform(CGAdMobPosition position);
 
 void TestDeviceHashedId_platform(const char* deviceHashId);
 

@@ -22,14 +22,16 @@
 /**
  * Definitions for functions types passed to/from s3eExt interface
  */
+typedef  s3eResult(*CGAdMobRegister_t)(CGAdMobCallback cbid, s3eCallback fn, void* userData);
+typedef  s3eResult(*CGAdMobUnRegister_t)(CGAdMobCallback cbid, s3eCallback fn);
 typedef       void(*InitAdView_t)();
-typedef       bool(*ShowInterstitialAd_t)();
+typedef  s3eResult(*ShowInterstitialAd_t)();
 typedef       void(*SetGoogleAppKey_t)(const char* bannerAdUnitId, const char* interstatialAdUnitId);
 typedef       void(*BannerAdLoad_t)();
 typedef       void(*BannerAdShow_t)();
 typedef       void(*BannerAdHide_t)();
 typedef       void(*IsLandscape_t)(bool landscape);
-typedef       void(*BannerAdPosition_t)(int x, int y);
+typedef       void(*BannerAdPosition_t)(CGAdMobPosition position);
 typedef       void(*TestDeviceHashedId_t)(const char* deviceHashId);
 typedef       void(*Release_t)();
 
@@ -38,6 +40,8 @@ typedef       void(*Release_t)();
  */
 typedef struct CGAdMobFuncs
 {
+    CGAdMobRegister_t m_CGAdMobRegister;
+    CGAdMobUnRegister_t m_CGAdMobUnRegister;
     InitAdView_t m_InitAdView;
     ShowInterstitialAd_t m_ShowInterstitialAd;
     SetGoogleAppKey_t m_SetGoogleAppKey;
@@ -93,9 +97,49 @@ s3eBool CGAdMobAvailable()
     return g_GotExt ? S3E_TRUE : S3E_FALSE;
 }
 
+s3eResult CGAdMobRegister(CGAdMobCallback cbid, s3eCallback fn, void* userData)
+{
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[0] func: CGAdMobRegister"));
+
+    if (!_extLoad())
+        return S3E_RESULT_ERROR;
+
+#ifdef LOADER_CALL_LOCK
+    s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
+#endif
+
+    s3eResult ret = g_Ext.m_CGAdMobRegister(cbid, fn, userData);
+
+#ifdef LOADER_CALL_LOCK
+    s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
+#endif
+
+    return ret;
+}
+
+s3eResult CGAdMobUnRegister(CGAdMobCallback cbid, s3eCallback fn)
+{
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[1] func: CGAdMobUnRegister"));
+
+    if (!_extLoad())
+        return S3E_RESULT_ERROR;
+
+#ifdef LOADER_CALL_LOCK
+    s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
+#endif
+
+    s3eResult ret = g_Ext.m_CGAdMobUnRegister(cbid, fn);
+
+#ifdef LOADER_CALL_LOCK
+    s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
+#endif
+
+    return ret;
+}
+
 void InitAdView()
 {
-    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[0] func: InitAdView"));
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[2] func: InitAdView"));
 
     if (!_extLoad())
         return;
@@ -113,18 +157,18 @@ void InitAdView()
     return;
 }
 
-bool ShowInterstitialAd()
+s3eResult ShowInterstitialAd()
 {
-    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[1] func: ShowInterstitialAd"));
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[3] func: ShowInterstitialAd"));
 
     if (!_extLoad())
-        return false;
+        return S3E_RESULT_ERROR;
 
 #ifdef LOADER_CALL_LOCK
     s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
 #endif
 
-    bool ret = g_Ext.m_ShowInterstitialAd();
+    s3eResult ret = g_Ext.m_ShowInterstitialAd();
 
 #ifdef LOADER_CALL_LOCK
     s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
@@ -135,7 +179,7 @@ bool ShowInterstitialAd()
 
 void SetGoogleAppKey(const char* bannerAdUnitId, const char* interstatialAdUnitId)
 {
-    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[2] func: SetGoogleAppKey"));
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[4] func: SetGoogleAppKey"));
 
     if (!_extLoad())
         return;
@@ -155,7 +199,7 @@ void SetGoogleAppKey(const char* bannerAdUnitId, const char* interstatialAdUnitI
 
 void BannerAdLoad()
 {
-    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[3] func: BannerAdLoad"));
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[5] func: BannerAdLoad"));
 
     if (!_extLoad())
         return;
@@ -175,7 +219,7 @@ void BannerAdLoad()
 
 void BannerAdShow()
 {
-    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[4] func: BannerAdShow"));
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[6] func: BannerAdShow"));
 
     if (!_extLoad())
         return;
@@ -195,7 +239,7 @@ void BannerAdShow()
 
 void BannerAdHide()
 {
-    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[5] func: BannerAdHide"));
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[7] func: BannerAdHide"));
 
     if (!_extLoad())
         return;
@@ -215,7 +259,7 @@ void BannerAdHide()
 
 void IsLandscape(bool landscape)
 {
-    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[6] func: IsLandscape"));
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[8] func: IsLandscape"));
 
     if (!_extLoad())
         return;
@@ -233,9 +277,9 @@ void IsLandscape(bool landscape)
     return;
 }
 
-void BannerAdPosition(int x, int y)
+void BannerAdPosition(CGAdMobPosition position)
 {
-    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[7] func: BannerAdPosition"));
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[9] func: BannerAdPosition"));
 
     if (!_extLoad())
         return;
@@ -244,7 +288,7 @@ void BannerAdPosition(int x, int y)
     s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
 #endif
 
-    g_Ext.m_BannerAdPosition(x, y);
+    g_Ext.m_BannerAdPosition(position);
 
 #ifdef LOADER_CALL_LOCK
     s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
@@ -255,7 +299,7 @@ void BannerAdPosition(int x, int y)
 
 void TestDeviceHashedId(const char* deviceHashId)
 {
-    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[8] func: TestDeviceHashedId"));
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[10] func: TestDeviceHashedId"));
 
     if (!_extLoad())
         return;
@@ -275,7 +319,7 @@ void TestDeviceHashedId(const char* deviceHashId)
 
 void Release()
 {
-    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[9] func: Release"));
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[11] func: Release"));
 
     if (!_extLoad())
         return;

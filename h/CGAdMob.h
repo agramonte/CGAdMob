@@ -17,6 +17,68 @@
 #define S3E_EXT_CGADMOB_H
 
 #include <s3eTypes.h>
+
+/**
+ * Callback events.
+ *
+ * @par Required Header Files
+ * CGAdMob.h
+ */
+typedef enum CGAdMobCallback
+{
+    /**
+     * Called when an interstitial ad request succeeded. Show it at the next transition point in your
+     * application such as when transitioning between view controllers.
+     */
+    CG_ADMOB_CALLBACK_INTERSTITIALRECEIVED = 0,
+
+    /**
+    * Called when an interstitial ad request completed without an interstitial to
+    * show. This is common since interstitials are shown sparingly to users.
+    */
+    CG_ADMOB_CALLBACK_INTERSTITIALFAILED = 1,
+
+    /**
+    * Called just before presenting an interstitial. After this method finishes the interstitial will
+    * animate onto the screen. Use this opportunity to stop animations and save the state of your
+    * application in case the user leaves while the interstitial is on screen (e.g. to visit the App
+    Store from a link on the interstitial).
+    */
+    CG_ADMOB_CALLBACK_INTERSTITIALWILLPRESENT = 2,
+    
+    /**
+    * Called before the interstitial is to be animated off the screen.
+    */
+    CG_ADMOB_CALLBACK_INTERSTITIALWILLDISMISS = 3,
+    
+    /**
+    * Called just after dismissing an interstitial and it has animated off the screen.
+    */
+    CG_ADMOB_CALLBACK_INTERSTITIALDISMISS = 4,
+    
+    /** Called just before the application will background or terminate because the user clicked on an
+    * ad that will launch another application (such as the App Store). The normal
+    * UIApplicationDelegate methods, like applicationDidEnterBackground:, will be called immediately
+    * before this.
+    */
+    CG_ADMOB_CALLBACK_INTERSTITIALLEAVEAPP = 5,
+
+    CGADMOB_CALLBACK_MAX
+} CGAdMobCallback;
+
+
+
+/**
+ * Ad position.
+ *
+ * @par Required Header Files
+ * CGAdMob.h
+ */
+typedef enum CGAdMobPosition
+{
+    CG_ADMOB_POSITION_TOP    = 1,  ///< Ad is positioned at top of screen.
+    CG_ADMOB_POSITION_BOTTOM = 2,  ///< Ad is positioned at bottom of screen.
+} CGAdMobPosition;
 // \cond HIDDEN_DEFINES
 S3E_BEGIN_C_DECL
 // \endcond
@@ -27,6 +89,37 @@ S3E_BEGIN_C_DECL
 s3eBool CGAdMobAvailable();
 
 /**
+ * Registers a callback to be called for an operating system event.
+ *
+ * The available callback types are listed in @ref CGAdMobCallback.
+ * @param cbid ID of the event for which to register.
+ * @param fn callback function.
+ * @param userdata Value to pass to the @e userdata parameter of @e NotifyFunc.
+ * @return
+ *  - @ref S3E_RESULT_SUCCESS if no error occurred.
+ *  - @ref S3E_RESULT_ERROR if the operation failed.\n
+ *
+ * @see CGAdMobUnRegister
+ * @note For more information on the system data passed as a parameter to the callback
+ * registered using this function, see the @ref CGAdMobCallback enum.
+ */
+s3eResult CGAdMobRegister(CGAdMobCallback cbid, s3eCallback fn, void* userData);
+
+/**
+ * Unregister a callback for a given event.
+ * @param cbid ID of the callback for which to register.
+ * @param fn Callback Function.
+ * @return
+ * - @ref S3E_RESULT_SUCCESS if no error occurred.
+ * - @ref S3E_RESULT_ERROR if the operation failed.\n
+ * @note For more information on the systemData passed as a parameter to the callback
+ * registered using this function, see the CGAdMobCallback enum.
+ * @note It is not necessary to define a return value for any registered callback.
+ * @see CGAdMobRegister
+ */
+s3eResult CGAdMobUnRegister(CGAdMobCallback cbid, s3eCallback fn);
+
+/**
  * Most work is done in this method. Call it after setting up the key.
  */
 void InitAdView();
@@ -34,7 +127,7 @@ void InitAdView();
 /**
  * Returns true if the interstitial ad ready and was displayed successfully.
  */
-bool ShowInterstitialAd();
+s3eResult ShowInterstitialAd();
 
 /**
 * Currently only works with a max of 2 ad units. This might change in the future.
@@ -65,7 +158,7 @@ void IsLandscape(bool landscape);
 /**
 * Optional: If not called banner will display at the top.
 */
-void BannerAdPosition(int x, int y);
+void BannerAdPosition(CGAdMobPosition position);
 
 /**
 * Optional: Sets the test device string.

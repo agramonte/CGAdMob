@@ -1,5 +1,72 @@
+#
+callbacks
+
 include:
 #include <s3eTypes.h>
+
+/**
+ * Callback events.
+ *
+ * @par Required Header Files
+ * CGAdMob.h
+ */
+typedef enum CGAdMobCallback
+{
+    /**
+     * Called when an interstitial ad request succeeded. Show it at the next transition point in your
+     * application such as when transitioning between view controllers.
+     */
+    CG_ADMOB_CALLBACK_INTERSTITIALRECEIVED = 0,
+
+    /**
+    * Called when an interstitial ad request completed without an interstitial to
+    * show. This is common since interstitials are shown sparingly to users.
+    */
+    CG_ADMOB_CALLBACK_INTERSTITIALFAILED = 1,
+
+    /**
+    * Called just before presenting an interstitial. After this method finishes the interstitial will
+    * animate onto the screen. Use this opportunity to stop animations and save the state of your
+    * application in case the user leaves while the interstitial is on screen (e.g. to visit the App
+    Store from a link on the interstitial).
+    */
+    CG_ADMOB_CALLBACK_INTERSTITIALWILLPRESENT = 2,
+    
+    /**
+    * Called before the interstitial is to be animated off the screen.
+    */
+    CG_ADMOB_CALLBACK_INTERSTITIALWILLDISMISS = 3,
+    
+    /**
+    * Called just after dismissing an interstitial and it has animated off the screen.
+    */
+    CG_ADMOB_CALLBACK_INTERSTITIALDISMISS = 4,
+    
+    /** Called just before the application will background or terminate because the user clicked on an
+    * ad that will launch another application (such as the App Store). The normal
+    * UIApplicationDelegate methods, like applicationDidEnterBackground:, will be called immediately
+    * before this.
+    */
+    CG_ADMOB_CALLBACK_INTERSTITIALLEAVEAPP = 5,
+
+    CGADMOB_CALLBACK_MAX
+} CGAdMobCallback;
+
+
+
+/**
+ * Ad position.
+ *
+ * @par Required Header Files
+ * CGAdMob.h
+ */
+typedef enum CGAdMobPosition
+{
+    CG_ADMOB_POSITION_TOP    = 1,  ///< Ad is positioned at top of screen.
+    CG_ADMOB_POSITION_BOTTOM = 2,  ///< Ad is positioned at bottom of screen.
+} CGAdMobPosition;
+
+
 
 functions:
 
@@ -12,7 +79,7 @@ void InitAdView() run_on_os_thread
 /**
  * Returns true if the interstitial ad ready and was displayed successfully.
  */
-bool ShowInterstitialAd() run_on_os_thread
+s3eResult ShowInterstitialAd() run_on_os_thread
 
 
 /**
@@ -45,7 +112,7 @@ void IsLandscape(bool landscape) run_on_os_thread
 /**
 * Optional: If not called banner will display at the top.
 */
-void BannerAdPosition(int x, int y) run_on_os_thread
+void BannerAdPosition(CGAdMobPosition position) run_on_os_thread
 
 /**
 * Optional: Sets the test device string.

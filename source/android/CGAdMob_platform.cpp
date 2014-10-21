@@ -13,6 +13,14 @@
 #include <jni.h>
 #include "IwDebug.h"
 
+
+ static void cgAdmob_NotifyAdClosed(JNIEnv *, jobject);
+ static void cgAdmob_NotifyAdFailedToLoad(JNIEnv *, jobject);
+ static void cgAdmob_NotifyAdLoaded(JNIEnv *, jobject);
+ static void cgAdmob_NotifyAdOpened(JNIEnv *, jobject);
+ static void cgAdmob_NotifyAdLeftApplication(JNIEnv *, jobject);
+
+
 static jobject g_Obj;
 static jmethodID g_InitAdView;
 static jmethodID g_ShowInterstitialAd;
@@ -32,6 +40,16 @@ s3eResult CGAdMobInit_platform()
     jobject obj = NULL;
     jmethodID cons = NULL;
 
+     const JNINativeMethod nativeMethodDefs[] = {
+     { "notifyAdClosed", "()V", (void *)&cgAdmob_NotifyAdClosed },
+     { "notifyAdFailedToLoad", "()V", (void *)&cgAdmob_NotifyAdFailedToLoad },
+     { "notifyAdLoaded", "()V", (void *)&cgAdmob_NotifyAdLoaded },
+     { "notifyAdOpened", "()V", (void *)&cgAdmob_NotifyAdOpened },
+     { "notifyAdLeftApplication", "()V", (void *)&cgAdmob_NotifyAdLeftApplication },
+     
+     };
+    
+    
     // Get the extension class
     jclass cls = s3eEdkAndroidFindClass("CGAdMob");
     if (!cls)
@@ -52,7 +70,7 @@ s3eResult CGAdMobInit_platform()
     if (!g_InitAdView)
         goto fail;
 
-    g_ShowInterstitialAd = env->GetMethodID(cls, "ShowInterstitialAd", "()Z");
+    g_ShowInterstitialAd = env->GetMethodID(cls, "ShowInterstitialAd", "()I");
     if (!g_ShowInterstitialAd)
         goto fail;
 
@@ -76,7 +94,7 @@ s3eResult CGAdMobInit_platform()
     if (!g_IsLandscape)
         goto fail;
 
-    g_BannerAdPosition = env->GetMethodID(cls, "BannerAdPosition", "(II)V");
+    g_BannerAdPosition = env->GetMethodID(cls, "BannerAdPosition", "(I)V");
     if (!g_BannerAdPosition)
         goto fail;
 
@@ -88,7 +106,8 @@ s3eResult CGAdMobInit_platform()
     if (!g_Release)
         goto fail;
 
-
+    env->RegisterNatives(cls, nativeMethodDefs, sizeof(nativeMethodDefs)/sizeof(nativeMethodDefs[0]));
+    
 
     IwTrace(CGADMOB, ("CGADMOB init success"));
     g_Obj = env->NewGlobalRef(obj);
@@ -127,10 +146,10 @@ void InitAdView_platform()
     env->CallVoidMethod(g_Obj, g_InitAdView);
 }
 
-bool ShowInterstitialAd_platform()
+s3eResult ShowInterstitialAd_platform()
 {
     JNIEnv* env = s3eEdkJNIGetEnv();
-    return (bool)env->CallBooleanMethod(g_Obj, g_ShowInterstitialAd);
+    return (s3eResult)env->CallIntMethod(g_Obj, g_ShowInterstitialAd);
 }
 
 void SetGoogleAppKey_platform(const char* bannerAdUnitId, const char* interstatialAdUnitId)
@@ -165,10 +184,10 @@ void IsLandscape_platform(bool landscape)
     env->CallVoidMethod(g_Obj, g_IsLandscape, landscape);
 }
 
-void BannerAdPosition_platform(int x, int y)
+void BannerAdPosition_platform(CGAdMobPosition position)
 {
     JNIEnv* env = s3eEdkJNIGetEnv();
-    env->CallVoidMethod(g_Obj, g_BannerAdPosition, x, y);
+    env->CallVoidMethod(g_Obj, g_BannerAdPosition, position);
 }
 
 void TestDeviceHashedId_platform(const char* deviceHashId)
@@ -183,3 +202,31 @@ void Release_platform()
     JNIEnv* env = s3eEdkJNIGetEnv();
     env->CallVoidMethod(g_Obj, g_Release);
 }
+
+//------------------------------------------------
+
+ void cgAdmob_NotifyAdClosed(JNIEnv *evn, jobject obj)
+ {
+   s3eEdkCallbacksEnqueue(S3E_EXT_CGADMOB_HASH, CG_ADMOB_CALLBACK_INTERSTITIALDISMISS);
+ }
+ 
+ void cgAdmob_NotifyAdFailedToLoad(JNIEnv *evn, jobject obj)
+ {
+ s3eEdkCallbacksEnqueue(S3E_EXT_CGADMOB_HASH, CG_ADMOB_CALLBACK_INTERSTITIALFAILED);
+ }
+ 
+ void cgAdmob_NotifyAdLoaded(JNIEnv * env, jobject obj)
+ {
+ s3eEdkCallbacksEnqueue(S3E_EXT_CGADMOB_HASH, CG_ADMOB_CALLBACK_INTERSTITIALRECEIVED);
+ }
+ 
+ void cgAdmob_NotifyAdOpened(JNIEnv * env, jobject obj)
+ {
+ s3eEdkCallbacksEnqueue(S3E_EXT_CGADMOB_HASH,CG_ADMOB_CALLBACK_INTERSTITIALWILLPRESENT);
+ 
+ }
+ 
+ void cgAdmob_NotifyAdLeftApplication(JNIEnv * env, jobject obj)
+ {
+ s3eEdkCallbacksEnqueue(S3E_EXT_CGADMOB_HASH, CG_ADMOB_CALLBACK_INTERSTITIALLEAVEAPP);
+ }

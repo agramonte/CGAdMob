@@ -10,6 +10,55 @@ static int32 _ad(void *systemData, void *userData)
     return 0;
 }
 
+static int32 onAdMobDismiss(void* systemData, void* userData)
+{
+    CCLog("---------------------------AdMob Ad dismissed.");
+    CCDirector::sharedDirector()->resume();
+    
+    return 0;
+}
+
+static int32 onAdMobWillDismiss(void* systemData, void* userData)
+{
+    CCLog("---------------------------AdMob Ad will dismissed.");
+    CCDirector::sharedDirector()->resume();
+    
+    return 0;
+}
+
+static int32 onAdMobPresent(void* systemData, void* userData)
+{
+    CCLog("---------------------------AdMob Ad presented.");
+    CCDirector::sharedDirector()->resume();
+    
+    return 0;
+}
+
+static int32 onAdMobRecieved(void* systemData, void* userData)
+{
+    CCLog("---------------------------AdMob Ad recieved.");
+    CCDirector::sharedDirector()->resume();
+    
+    return 0;
+}
+
+static int32 onAdMobFailed(void* systemData, void* userData)
+{
+    CCLog("---------------------------AdMob Ad failed.");
+    CCDirector::sharedDirector()->resume();
+    
+    return 0;
+}
+
+static int32 onAdLeaveApp(void* systemData, void* userData)
+{
+    CCLog("---------------------------AdMob Leaving app.");
+    CCDirector::sharedDirector()->resume();
+    
+    return 0;
+}
+
+
 
 GameLayer::~GameLayer()
 {
@@ -44,29 +93,47 @@ bool GameLayer::init()
     
     if (CGAdMobAvailable()) {
         
+        CCLog("---------------------------AdMob setting Key.");
         //Set up both Ad spot keys.
-        SetGoogleAppKey("your-banner-key", "your-interstitial-key");
+        SetGoogleAppKey("banner_ad_id", "interstatial_ad_id");
         
         //Optional: Un-comment to make it landscape. It does nothing on Android since the smart ads rotate appropiately. On iOS the documentation states I need it to change a property to landscape, but I have not seen a difference.
         //IsLandscape(true);
         
-        //Optional: Specify the position of the ad. Increasing the y axis will result in the ad being placed at the bottom.
-        //BannerAdPosition(0, 4);
-        
+        //CCLog("---------------------------AdMob adding test device.");
         //Optional: Add the device hash id so that you recieve test ads on your test device.
-        //TestDeviceHashedId("your-device-test-hash-here.");
+        //TestDeviceHashedId("test-device-id");
         
-        //Set up the views.
+
+        CCLog("---------------------------AdMob setting position.");
+        //Optional but not tested without: Specify the position of the ad.
+        //BannerAdPosition(CG_ADMOB_POSITION_TOP);
+        BannerAdPosition(CG_ADMOB_POSITION_BOTTOM);
+        
+        
+        CCLog("---------------------------AdMob callbacks.");
+        //Optional: Register callbacks:
+        CGAdMobRegister(CG_ADMOB_CALLBACK_INTERSTITIALWILLDISMISS, onAdMobWillDismiss, this);
+        CGAdMobRegister(CG_ADMOB_CALLBACK_INTERSTITIALWILLPRESENT, onAdMobPresent, this);
+        CGAdMobRegister(CG_ADMOB_CALLBACK_INTERSTITIALRECEIVED, onAdMobRecieved, this);
+        CGAdMobRegister(CG_ADMOB_CALLBACK_INTERSTITIALFAILED, onAdMobFailed, this);
+        CGAdMobRegister(CG_ADMOB_CALLBACK_INTERSTITIALDISMISS, onAdMobDismiss, this);
+        CGAdMobRegister(CG_ADMOB_CALLBACK_INTERSTITIALLEAVEAPP, onAdLeaveApp, this);
+        
+        
+        CCLog("---------------------------AdMob init view.");
+        //Required: Set up the views.
         InitAdView();
         
         //Call this once to show banner ad. And if you have not specified a refresh interval, call it every time you need to refresh the banner ad.
+        
+        CCLog("---------------------------AdMob load banner ad.");
         BannerAdLoad();
         
-        //Timer to load the next one.
-        s3eTimerSetTimer(30000, _ad, NULL);
         
-        //Show Interstitial.
-        ShowInterstitialAd();
+        //Timer to load the next one.
+        s3eTimerSetTimer(5000, _ad, NULL);
+
         
         
     }

@@ -21,13 +21,16 @@ import android.view.*;
 
 class CGAdMob
 {
+    
+    public final static int CG_ADMOB_POSITION_TOP    = 1;
+    public final static int CG_ADMOB_POSITION_BOTTOM = 2;
+    
     private AdView _googleAdView;
 	private InterstitialAd _mInterstitialAd;
 
         //Logging
     private String logTag = "marmalade";
-    private String versionNumber = "Version: 1.0.03";
-	private String _bannerAdUnitId = "";
+    private String _bannerAdUnitId = "";
     private String _interstatialAdUnitId = "";
 	private RelativeLayout.LayoutParams _lp;
     private boolean _isLandscape = false;
@@ -39,8 +42,7 @@ class CGAdMob
 
     public void InitAdView()
     {
-        Log.w(logTag, versionNumber);
-
+       
 	        //Create LayoutParams.
         this._lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         
@@ -49,14 +51,14 @@ class CGAdMob
 		        
     }
     
-    public boolean ShowInterstitialAd()
+    public int ShowInterstitialAd()
     {
-        boolean adLoaded = false;
+        int adLoaded = 0;
         
         if (this._mInterstitialAd.isLoaded()) {
             
             this._mInterstitialAd.show();
-            adLoaded = true;
+            adLoaded = 1;
         }
         
         //TODO: Ad events and make this call on fail instead of every time.
@@ -69,6 +71,7 @@ class CGAdMob
         return adLoaded;
         
     }
+    
     public void SetGoogleAppKey(String bannerAdUnitId, String interstatialAdUnitId)
     {
         this._interstatialAdUnitId = interstatialAdUnitId;
@@ -97,6 +100,7 @@ class CGAdMob
         }
         
     }
+
     public void BannerAdHide()
     {
 	try {
@@ -112,11 +116,13 @@ class CGAdMob
             Log.e(logTag, "Hide Google view ex. thrown: " + e.toString());
             return;
         }
-        
+                
     }
     
     
     private void _setGoogleAds(){
+        
+        
         
         
         //Set up google banner.
@@ -132,6 +138,7 @@ class CGAdMob
         //Set up interstatial.
         this._mInterstitialAd = new InterstitialAd(LoaderActivity.m_Activity);
         this._mInterstitialAd.setAdUnitId(_interstatialAdUnitId);
+        this._mInterstitialAd.setAdListener(admobListener);
         
         //Request the first interstitial ad. So that on request it is ready.
         AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
@@ -161,26 +168,70 @@ class CGAdMob
         this._isLandscape = landscape;
     }
     
-    public void BannerAdPosition(int x, int y)
+    
+    public void BannerAdPosition(int position)
     {
-        if (y != 0)
-        {
+        if(position == CG_ADMOB_POSITION_BOTTOM){
             this._showAtBottom = true;
-        } else
-        {
+        } else {
             this._showAtBottom = false;
         }
         
         
     }
-               
+    
     public void TestDeviceHashedId(String deviceHashId)
     {
         this._testDeviceHashId = deviceHashId;
     }
-               
+    
     public void Release()
     {
         
     }
+    
+    public AdListener admobListener = new AdListener()
+	{
+    
+
+    
+    @Override
+    public void onAdClosed(){
+    notifyAdClosed();
+    }
+    
+    @Override
+    public void onAdFailedToLoad(int errorCode){
+        Log.e(logTag, "Google Ad failed to Load: " + errorCode.toString());
+        notifyAdFailedToLoad();
+    }
+
+    @Override
+    public void onAdLoaded()
+    {
+        notifyAdLoaded();
+    }
+
+    @Override
+    public void onAdOpened()
+    {
+        notifyAdOpened();
+    }
+
+    @Override
+    public void onAdLeftApplication()
+    {
+        notifyAdLeftApplication();
+    }
+};
+
+////////////////////////////////////////////////////////////////
+// Native interface
+public native void notifyAdClosed();
+public native void notifyAdFailedToLoad();
+public native void notifyAdLoaded();
+public native void notifyAdOpened();
+public native void notifyAdLeftApplication();
+////////////////////////////////////////////////////////////////
+
 }

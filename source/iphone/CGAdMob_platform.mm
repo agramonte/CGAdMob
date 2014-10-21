@@ -21,6 +21,7 @@ extern "C"{
 #include "s3eEdk.h"
 #include "s3eEdk_iphone.h"
 #include "s3eDebug.h"
+#include <s3eTypes.h>
 
 
 
@@ -38,6 +39,8 @@ extern "C"{
 @property (nonatomic) const char *interstatialAdId;
 @property (nonatomic, retain) NSString *deviceHashId;
 @property (nonatomic) bool interstitialError;
+@property (nonatomic, retain) UIView* currentView;
+@property (nonatomic, retain) UIViewController* viewController;
 @end
 
 @implementation CGAdMob
@@ -47,7 +50,8 @@ extern "C"{
 /// application such as when transitioning between view controllers.
 - (void)interstitialDidReceiveAd:(GADInterstitial *)ad
 {
-    
+    s3eEdkCallbacksEnqueue(S3E_EXT_CGADMOB_HASH,
+                           CG_ADMOB_CALLBACK_INTERSTITIALRECEIVED);
 }
 
 /// Called when an interstitial ad request completed without an interstitial to
@@ -63,6 +67,9 @@ extern "C"{
     s3eDebugOutputString([info UTF8String]);
 
     self.interstitialError = true;
+    
+    s3eEdkCallbacksEnqueue(S3E_EXT_CGADMOB_HASH,
+                           CG_ADMOB_CALLBACK_INTERSTITIALFAILED);
 
 }
 
@@ -72,12 +79,18 @@ extern "C"{
 /// application in case the user leaves while the interstitial is on screen (e.g. to visit the App
 /// Store from a link on the interstitial).
 - (void)interstitialWillPresentScreen:(GADInterstitial *)ad{
+    self.viewController = s3eEdkGetUIViewController();
+    
+    s3eEdkCallbacksEnqueue(S3E_EXT_CGADMOB_HASH,
+                           CG_ADMOB_CALLBACK_INTERSTITIALWILLPRESENT);
+    
     
 }
 
 /// Called before the interstitial is to be animated off the screen.
 - (void)interstitialWillDismissScreen:(GADInterstitial *)ad{
-    
+    s3eEdkCallbacksEnqueue(S3E_EXT_CGADMOB_HASH,
+                           CG_ADMOB_CALLBACK_INTERSTITIALWILLDISMISS);
 }
 
 /// Called just after dismissing an interstitial and it has animated off the screen.
@@ -90,7 +103,10 @@ extern "C"{
 
     s3eDebugOutputString([info UTF8String]);
 
-    s3eEdkGetUIViewController().view = s3eEdkGetUIView();
+    s3eEdkGetUIViewController().view = self.viewController.view;
+    
+    s3eEdkCallbacksEnqueue(S3E_EXT_CGADMOB_HASH,
+                           CG_ADMOB_CALLBACK_INTERSTITIALDISMISS);
     
 }
 
@@ -99,7 +115,8 @@ extern "C"{
 /// UIApplicationDelegate methods, like applicationDidEnterBackground:, will be called immediately
 /// before this.
 - (void)interstitialWillLeaveApplication:(GADInterstitial *)ad{
-    
+    s3eEdkCallbacksEnqueue(S3E_EXT_CGADMOB_HASH,
+                           CG_ADMOB_CALLBACK_INTERSTITIALLEAVEAPP);
 }
 
 
@@ -186,7 +203,7 @@ s3eResult CGAdMobInit_platform()
 }
 
 void CGAdMobTerminate_platform()
-{
+{ 
 }
 
 void InitAdView_platform()
@@ -233,18 +250,19 @@ void InitAdView_platform()
     [intAd loadInterstitialRequest];
 }
 
-bool ShowInterstitialAd_platform()
+s3eResult ShowInterstitialAd_platform()
 {
     [intAd showInterstitial];
-    return true;
+    return S3E_RESULT_SUCCESS;
 }
 
 void SetGoogleAppKey_platform(const char* bannerAdUnitId, const char* interstatialAdUnitId)
 {
+
     _bannerAdUnitId = bannerAdUnitId;
     _interstatialAdUnitId = interstatialAdUnitId;
-}
 
+}
 
 void BannerAdLoad_platform()
 {
@@ -253,12 +271,12 @@ void BannerAdLoad_platform()
 
 void BannerAdShow_platform()
 {
-    [intAd.bannerView setHidden:YES];
+    [intAd.bannerView setHidden:NO];
 }
 
 void BannerAdHide_platform()
 {
-    [intAd.bannerView setHidden:NO];
+    [intAd.bannerView setHidden:YES];
 }
 
 void IsLandscape_platform(bool landscape)
@@ -267,9 +285,13 @@ void IsLandscape_platform(bool landscape)
     
 }
 
-void BannerAdPosition_platform(int x, int y)
+void BannerAdPosition_platform(CGAdMobPosition position)
 {
-    _displayBannerAtBottom = true;
+    if (position = CG_ADMOB_POSITION_BOTTOM) {
+        _displayBannerAtBottom = true;
+    } else {
+        _displayBannerAtBottom = false;
+    }
 }
 
 void TestDeviceHashedId_platform(const char* deviceHashId)

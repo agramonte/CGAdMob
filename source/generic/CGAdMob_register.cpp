@@ -30,10 +30,10 @@ static void InitAdView_wrap()
     s3eEdkThreadRunOnOS((s3eEdkThreadFunc)InitAdView, 0);
 }
 
-static bool ShowInterstitialAd_wrap()
+static s3eResult ShowInterstitialAd_wrap()
 {
     IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob func on main thread: ShowInterstitialAd"));
-    return (bool)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)ShowInterstitialAd, 0);
+    return (s3eResult)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)ShowInterstitialAd, 0);
 }
 
 static void SetGoogleAppKey_wrap(const char* bannerAdUnitId, const char* interstatialAdUnitId)
@@ -66,10 +66,10 @@ static void IsLandscape_wrap(bool landscape)
     s3eEdkThreadRunOnOS((s3eEdkThreadFunc)IsLandscape, 1, landscape);
 }
 
-static void BannerAdPosition_wrap(int x, int y)
+static void BannerAdPosition_wrap(CGAdMobPosition position)
 {
     IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob func on main thread: BannerAdPosition"));
-    s3eEdkThreadRunOnOS((s3eEdkThreadFunc)BannerAdPosition, 2, x, y);
+    s3eEdkThreadRunOnOS((s3eEdkThreadFunc)BannerAdPosition, 1, position);
 }
 
 static void TestDeviceHashedId_wrap(const char* deviceHashId)
@@ -97,25 +97,37 @@ static void Release_wrap()
 
 #endif
 
+s3eResult CGAdMobRegister(CGAdMobCallback cbid, s3eCallback fn, void* pData)
+{
+    return s3eEdkCallbacksRegister(S3E_EXT_CGADMOB_HASH, CGADMOB_CALLBACK_MAX, cbid, fn, pData, 0);
+};
+
+s3eResult CGAdMobUnRegister(CGAdMobCallback cbid, s3eCallback fn)
+{
+    return s3eEdkCallbacksUnRegister(S3E_EXT_CGADMOB_HASH, CGADMOB_CALLBACK_MAX, cbid, fn);
+}
+
 void CGAdMobRegisterExt()
 {
     /* fill in the function pointer struct for this extension */
-    void* funcPtrs[10];
-    funcPtrs[0] = (void*)InitAdView;
-    funcPtrs[1] = (void*)ShowInterstitialAd;
-    funcPtrs[2] = (void*)SetGoogleAppKey;
-    funcPtrs[3] = (void*)BannerAdLoad;
-    funcPtrs[4] = (void*)BannerAdShow;
-    funcPtrs[5] = (void*)BannerAdHide;
-    funcPtrs[6] = (void*)IsLandscape;
-    funcPtrs[7] = (void*)BannerAdPosition;
-    funcPtrs[8] = (void*)TestDeviceHashedId;
-    funcPtrs[9] = (void*)Release;
+    void* funcPtrs[12];
+    funcPtrs[0] = (void*)CGAdMobRegister;
+    funcPtrs[1] = (void*)CGAdMobUnRegister;
+    funcPtrs[2] = (void*)InitAdView;
+    funcPtrs[3] = (void*)ShowInterstitialAd;
+    funcPtrs[4] = (void*)SetGoogleAppKey;
+    funcPtrs[5] = (void*)BannerAdLoad;
+    funcPtrs[6] = (void*)BannerAdShow;
+    funcPtrs[7] = (void*)BannerAdHide;
+    funcPtrs[8] = (void*)IsLandscape;
+    funcPtrs[9] = (void*)BannerAdPosition;
+    funcPtrs[10] = (void*)TestDeviceHashedId;
+    funcPtrs[11] = (void*)Release;
 
     /*
      * Flags that specify the extension's use of locking and stackswitching
      */
-    int flags[10] = { 0 };
+    int flags[12] = { 0 };
 
     /*
      * Register the extension
