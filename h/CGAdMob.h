@@ -107,7 +107,7 @@ s3eResult CGAdMobRegister(CGAdMobCallback cbid, s3eCallback fn, void* userData);
 
 /**
  * Unregister a callback for a given event.
- * @param cbid ID of the callback for which to register.
+ * @param cbid ID of the callback to unregister.
  * @param fn Callback Function.
  * @return
  * - @ref S3E_RESULT_SUCCESS if no error occurred.

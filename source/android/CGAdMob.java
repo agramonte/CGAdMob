@@ -202,7 +202,6 @@ class CGAdMob
     
     @Override
     public void onAdFailedToLoad(int errorCode){
-        Log.e(logTag, "Google Ad failed to Load: " + errorCode.toString());
         notifyAdFailedToLoad();
     }
 

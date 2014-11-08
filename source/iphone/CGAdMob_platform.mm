@@ -10,14 +10,20 @@
 
 extern "C"{
 #import "GADBannerView.h"
-}
 
-#include "GADBannerViewDelegate.h"
-#include "GADInterstitial.h"
-#include "GADInterstitialDelegate.h"
-#include "GADModules.h"
-#include "GADRequest.h"
-#include "GADRequestError.h"
+#import "GADInterstitial.h"
+#import "GADInterstitialDelegate.h"
+
+/*
+#import "GADBannerViewDelegate.h"
+#import "GADModules.h"
+#import "GADRequest.h"
+#import "GADRequestError.h"
+*/
+    
+ }
+
+
 #include "s3eEdk.h"
 #include "s3eEdk_iphone.h"
 #include "s3eDebug.h"
