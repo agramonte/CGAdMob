@@ -1,12 +1,10 @@
 CGAdMob
 ==========
 Extremely simplistic implementation of the AdMob Api.
+Platform Support: Android, iOS (Library 6.12.2).
+Built with Marmalade version: 7.4.2.
 
-Version: 1.0.01
-
-Platform Support: Android, iOS (Library 6.10)
-
-Instructions:
+Instructions (test project demonstrate other options):
 
 1. Add the project CGAdMob
 
