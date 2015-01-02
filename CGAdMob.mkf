@@ -40,8 +40,6 @@ deployments
 
     android-extra-manifest="extras.manifest.txt"
     android-extra-application-manifest="extras.application.txt"
-    android-external-jars="incoming/android/google-play-services.jar"
-    android-external-jars="incoming/android/android-support-v4.jar"
 
     android-external-jars="lib/android/CGAdMob.jar"
     android-so="lib/android/libCGAdMob.so"
