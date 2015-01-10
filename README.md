@@ -4,13 +4,14 @@ Extremely simplistic implementation of the AdMob Api.
 
 Platform Support: Android, iOS (Library 6.12.2).
 
-Built with Marmalade version: 7.4.2.
+Instructional video for the Quick bindings can be found here:
+http://youtu.be/BL5s2Emrs7U
 
-Instructions (test project demonstrate other options):
+Built with Marmalade version: 7.4.3.
 
-1. Add the CGAdMob project.
+Instructions (test project demonstrates other options):
 
-2. Add the s3eGooglePlayServices project.
+1. Add the project CGAdMob
 
 2. Set the a banner ad unit and an interstitial ad unitId:
 
@@ -20,7 +21,7 @@ SetGoogleAppKey("banner ad unit id", "interstitial ad unit id”);
 
 InitAdView()
 
-4. Show banner ad (call every time you need to show a banner ad or set the refresh rate in the Admob control panel).
+4. Show banner ad:
 
 BannerAdLoad();
 
@@ -31,6 +32,8 @@ ShowInterstitialAd();
 6. Make sure to release it before your app closes.
 
 Release();
+
+
 
 
 
