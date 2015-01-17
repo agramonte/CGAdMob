@@ -95,14 +95,15 @@ bool GameLayer::init()
         
         CCLog("---------------------------AdMob setting Key.");
         //Set up both Ad spot keys.
-        SetGoogleAppKey("banner_ad_id", "interstatial_ad_id");
+        SetGoogleAppKey("<bannerid>", "<interId>");
         
         //Optional: Un-comment to make it landscape. It does nothing on Android since the smart ads rotate appropiately. On iOS the documentation states I need it to change a property to landscape, but I have not seen a difference.
         //IsLandscape(true);
         
         //CCLog("---------------------------AdMob adding test device.");
-        //Optional: Add the device hash id so that you recieve test ads on your test device.
-        //TestDeviceHashedId("test-device-id");
+        //Add the device hash id so that you recieve test ads on your test device.
+        //Unfortunately this version requires it.
+        TestDeviceHashedId("12345");
         
 
         CCLog("---------------------------AdMob setting position.");

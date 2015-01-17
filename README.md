@@ -10,6 +10,12 @@ Instructions (test project demonstrate other options):
 
 1. Add the project CGAdMob
 
+2. Add the extra string value to deployment section. If you are using a function that needs an Id you need to replace the 0 with your id. Otherwise 0 is fine for AdMob.
+
+deployment{
+	android-extra-strings='(gps_app_id,0)' 
+}
+
 2. Set the a banner ad unit and an interstitial ad unitId:
 
 SetGoogleAppKey("banner ad unit id", "interstitial ad unit id”);

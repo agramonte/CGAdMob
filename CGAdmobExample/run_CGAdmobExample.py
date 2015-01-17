@@ -10,5 +10,5 @@ if os.name == 'nt':
 cmd = list(sys.argv)
 cmd[0] = exe
 
-cmd.append('-via:"/Users/adriangomez/OneDrive/Development/CGAdmobExample/build_cgadmobexample_scons_x86/CGAdmobExample_release.via"')
+cmd.append('-via:"/Users/adriangomez/OneDrive/Development/CGAdMob/CGAdmobExample/build_cgadmobexample_scons_aarch64/CGAdmobExample_gcc_aarch64_release.via"')
 os.execvp(cmd[0], cmd)

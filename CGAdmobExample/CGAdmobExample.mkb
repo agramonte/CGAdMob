@@ -21,5 +21,6 @@ subprojects
 
 deployment
 {
+android-extra-strings='(gps_app_id,0)' 
 }
 
