@@ -1,0 +1,21 @@
+includepath .
+
+files
+{
+    quickuser_tolua.cpp
+    quickuser_tolua.pkg
+    quickuser.h
+
+    include/adMob.h
+    source/adMob.cpp
+    include/CGChartBoost.h
+    source/CGChartBoost.cpp
+
+}
+
+subproject
+{
+
+    s3eChartBoost
+    CGAdMob	
+}
