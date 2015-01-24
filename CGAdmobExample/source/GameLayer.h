@@ -29,6 +29,11 @@ public:
     // preprocessor macro for "static create()" constructor ( node() deprecated )
     CREATE_FUNC(GameLayer);
     
+    // Touches Began
+    void ccTouchesBegan(CCSet* touches, CCEvent* event);
+    
+    CCPoint touchToPoint(CCTouch* touch);
+    
 };
 
 #endif // __GAMELAYER_H__

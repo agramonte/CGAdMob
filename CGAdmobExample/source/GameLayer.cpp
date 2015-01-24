@@ -58,7 +58,7 @@ static int32 onAdLeaveApp(void* systemData, void* userData)
     return 0;
 }
 
-
+static bool adHidden = false;
 
 GameLayer::~GameLayer()
 {
@@ -91,11 +91,13 @@ bool GameLayer::init()
     // COCOS2D TIP
     // Create Cocos2D objects here
     
+    this->setTouchEnabled(true);
+    
     if (CGAdMobAvailable()) {
         
         CCLog("---------------------------AdMob setting Key.");
         //Set up both Ad spot keys.
-        SetGoogleAppKey("<bannerid>", "<interId>");
+        SetGoogleAppKey("<banner Id>", "<interstitial id>");
         
         //Optional: Un-comment to make it landscape. It does nothing on Android since the smart ads rotate appropiately. On iOS the documentation states I need it to change a property to landscape, but I have not seen a difference.
         //IsLandscape(true);
@@ -160,5 +162,34 @@ void GameLayer::update(float dt)
 
     // BOX2D TIP
     // Update objects from box2d coordinates here
+}
+
+CCPoint GameLayer::touchToPoint(CCTouch* touch)
+{
+    // convert the touch object to a position in our cocos2d space
+    return CCDirector::sharedDirector()->convertToGL(touch->locationInView());
+}
+
+void GameLayer::ccTouchesBegan(CCSet* touches, CCEvent* event)
+{
+    for( CCSetIterator it = touches->begin(); it != touches->end(); it++)
+    {
+        
+        CCTouch* touch = dynamic_cast<CCTouch*>(*it);
+        CCPoint touchPoint = this->touchToPoint(touch);
+        
+        if (touchPoint.y > CCDirector::sharedDirector()->getWinSize().height/2) {
+            if (adHidden) {
+                BannerAdShow();
+                adHidden = false;
+            } else
+            {
+                BannerAdHide();
+                adHidden = true;
+            }
+            
+            
+        }
+    }
 }
 

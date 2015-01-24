@@ -26,6 +26,7 @@ class CGAdMob
     public final static int CG_ADMOB_POSITION_BOTTOM = 2;
     
     private AdView _googleAdView;
+    private RelativeLayout _adLayout;
 	private InterstitialAd _mInterstitialAd;
 
         //Logging
@@ -77,6 +78,7 @@ class CGAdMob
         this._interstatialAdUnitId = interstatialAdUnitId;
         this._bannerAdUnitId = bannerAdUnitId;
     }
+    
     public void BannerAdLoad()
     {
         AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
@@ -85,11 +87,12 @@ class CGAdMob
     }
     public void BannerAdShow()
     {
+        
 	try {
             ViewGroup rootView = (ViewGroup) LoaderActivity.m_Activity.findViewById(android.R.id.content);
             
             for (int i = 0; i < rootView.getChildCount(); i++) {
-                if(rootView.getChildAt(i) == this._googleAdView) {
+                if(rootView.getChildAt(i) == this._adLayout) {
                     rootView.getChildAt(i).setVisibility(View.VISIBLE);
                 }
             }
@@ -107,7 +110,7 @@ class CGAdMob
             ViewGroup rootView = (ViewGroup) 	LoaderActivity.m_Activity.findViewById(android.R.id.content);
             
             for (int i = 0; i < rootView.getChildCount(); i++) {
-                if(rootView.getChildAt(i) == this._googleAdView) {
+                if(rootView.getChildAt(i) == this._adLayout) {
                     rootView.getChildAt(i).setVisibility(View.GONE);
                 }
             }
@@ -126,14 +129,14 @@ class CGAdMob
         
         
         //Set up google banner.
-        RelativeLayout adLayout = new RelativeLayout(LoaderActivity.m_Activity);
+        _adLayout = new RelativeLayout(LoaderActivity.m_Activity);
         
         this._googleAdView = new AdView(LoaderActivity.m_Activity);
         this._googleAdView.setAdUnitId(_bannerAdUnitId);
         this._googleAdView.setAdSize(AdSize.SMART_BANNER);
         
         this._googleAdView.setLayoutParams(_lp);
-        adLayout.addView(_googleAdView);
+        _adLayout.addView(_googleAdView);
         
         //Set up interstatial.
         this._mInterstitialAd = new InterstitialAd(LoaderActivity.m_Activity);
@@ -154,7 +157,7 @@ class CGAdMob
            }
             
             
-            LoaderActivity.m_Activity.addContentView(adLayout, _lp);
+            LoaderActivity.m_Activity.addContentView(_adLayout, _lp);
                 
         } catch (final Exception e) {
             Log.e(logTag, "Init Google view ex. thrown: " + e.toString());
