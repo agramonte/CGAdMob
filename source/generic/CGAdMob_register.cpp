@@ -72,6 +72,12 @@ static void BannerAdPosition_wrap(CGAdMobPosition position)
     s3eEdkThreadRunOnOS((s3eEdkThreadFunc)BannerAdPosition, 1, position);
 }
 
+static void BannerAdSize_wrap(CGAdMobBannerAdSize size)
+{
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob func on main thread: BannerAdSize"));
+    s3eEdkThreadRunOnOS((s3eEdkThreadFunc)BannerAdSize, 1, size);
+}
+
 static void TestDeviceHashedId_wrap(const char* deviceHashId)
 {
     IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob func on main thread: TestDeviceHashedId"));
@@ -92,6 +98,7 @@ static void Release_wrap()
 #define BannerAdHide BannerAdHide_wrap
 #define IsLandscape IsLandscape_wrap
 #define BannerAdPosition BannerAdPosition_wrap
+#define BannerAdSize BannerAdSize_wrap
 #define TestDeviceHashedId TestDeviceHashedId_wrap
 #define Release Release_wrap
 
@@ -110,7 +117,7 @@ s3eResult CGAdMobUnRegister(CGAdMobCallback cbid, s3eCallback fn)
 void CGAdMobRegisterExt()
 {
     /* fill in the function pointer struct for this extension */
-    void* funcPtrs[12];
+    void* funcPtrs[13];
     funcPtrs[0] = (void*)CGAdMobRegister;
     funcPtrs[1] = (void*)CGAdMobUnRegister;
     funcPtrs[2] = (void*)InitAdView;
@@ -121,13 +128,14 @@ void CGAdMobRegisterExt()
     funcPtrs[7] = (void*)BannerAdHide;
     funcPtrs[8] = (void*)IsLandscape;
     funcPtrs[9] = (void*)BannerAdPosition;
-    funcPtrs[10] = (void*)TestDeviceHashedId;
-    funcPtrs[11] = (void*)Release;
+    funcPtrs[10] = (void*)BannerAdSize;
+    funcPtrs[11] = (void*)TestDeviceHashedId;
+    funcPtrs[12] = (void*)Release;
 
     /*
      * Flags that specify the extension's use of locking and stackswitching
      */
-    int flags[12] = { 0 };
+    int flags[13] = { 0 };
 
     /*
      * Register the extension

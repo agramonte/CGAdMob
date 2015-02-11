@@ -97,7 +97,7 @@ bool GameLayer::init()
         
         CCLog("---------------------------AdMob setting Key.");
         //Set up both Ad spot keys.
-        SetGoogleAppKey("<banner Id>", "<interstitial id>");
+        SetGoogleAppKey("<bannerAdId>", "<Interstatial>");
         
         //Optional: Un-comment to make it landscape. It does nothing on Android since the smart ads rotate appropiately. On iOS the documentation states I need it to change a property to landscape, but I have not seen a difference.
         //IsLandscape(true);
@@ -112,6 +112,10 @@ bool GameLayer::init()
         //Optional but not tested without: Specify the position of the ad.
         //BannerAdPosition(CG_ADMOB_POSITION_TOP);
         BannerAdPosition(CG_ADMOB_POSITION_BOTTOM);
+        
+        
+        //Optional: Specify the ad size. Default Smart Size.
+        //BannerAdSize(CG_ADMOB_320x100);
         
         
         CCLog("---------------------------AdMob callbacks.");

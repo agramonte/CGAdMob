@@ -4,9 +4,9 @@ Extremely simplistic implementation of the AdMob Api.
 
 Platform Support: Android, iOS (Library 6.12.2).
 
-Built with Marmalade version: 7.5 (beta 2) and iOS 8 SDK
+Built with Marmalade version: 7.5 and iOS 8 SDK
 
-Instructions (test project demonstrate other options):
+Instructions (test project demonstrates other options):
 
 1. Add the project CGAdMob
 

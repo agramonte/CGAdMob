@@ -58,6 +58,8 @@ void IsLandscape_platform(bool landscape);
 
 void BannerAdPosition_platform(CGAdMobPosition position);
 
+void BannerAdSize_platform(CGAdMobBannerAdSize size);
+
 void TestDeviceHashedId_platform(const char* deviceHashId);
 
 void Release_platform();
