@@ -53,7 +53,7 @@ deployments
 #lines will cause the extension builder to re-output this section.
 deployments
 {
-    	iphone-link-opts="-F$MARMALADE_ROOT/extensions/AmazonAds/source/iphone -weak_framework AdSupport -weak_framework Security -weak_framework EventKit -weak_framework EventKitUI -weak_framework SystemConfiguration -weak_framework CoreTelephony -lsqlite3"
+    	iphone-link-opts="-F$MARMALADE_ROOT/extensions/CGAdMob/source/iphone -weak_framework AdSupport -weak_framework Security -weak_framework EventKit -weak_framework EventKitUI -weak_framework SystemConfiguration -weak_framework CoreTelephony -lsqlite3"
 
         iphone-link-lib="CGAdMob"
 	iphone-link-lib="libGoogleAdMobAds"
