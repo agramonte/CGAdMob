@@ -30,6 +30,7 @@ static jmethodID g_BannerAdShow;
 static jmethodID g_BannerAdHide;
 static jmethodID g_IsLandscape;
 static jmethodID g_BannerAdPosition;
+static jmethodID g_BannerAdSize;
 static jmethodID g_TestDeviceHashedId;
 static jmethodID g_Release;
 
@@ -96,6 +97,10 @@ s3eResult CGAdMobInit_platform()
 
     g_BannerAdPosition = env->GetMethodID(cls, "BannerAdPosition", "(I)V");
     if (!g_BannerAdPosition)
+        goto fail;
+
+    g_BannerAdSize = env->GetMethodID(cls, "BannerAdSize", "(I)V");
+    if (!g_BannerAdSize)
         goto fail;
 
     g_TestDeviceHashedId = env->GetMethodID(cls, "TestDeviceHashedId", "(Ljava/lang/String;)V");
@@ -188,6 +193,12 @@ void BannerAdPosition_platform(CGAdMobPosition position)
 {
     JNIEnv* env = s3eEdkJNIGetEnv();
     env->CallVoidMethod(g_Obj, g_BannerAdPosition, position);
+}
+
+void BannerAdSize_platform(CGAdMobBannerAdSize size)
+{
+    JNIEnv* env = s3eEdkJNIGetEnv();
+    env->CallVoidMethod(g_Obj, g_BannerAdSize, size);
 }
 
 void TestDeviceHashedId_platform(const char* deviceHashId)

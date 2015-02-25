@@ -67,6 +67,25 @@ typedef enum CGAdMobPosition
 } CGAdMobPosition;
 
 
+/**
+* Banner Ad Size.
+*
+* @par Required Header Files
+* CGAdMob.h
+*/
+typedef enum CGAdMobBannerAdSize
+{
+
+    CG_ADMOB_SMART = 0, ///< Default ad size.
+    CG_ADMOB_320x50 = 1,
+    CG_ADMOB_320x100 = 2,
+    CG_ADMOB_300x250 = 3,
+    CG_ADMOB_468x60 = 4,
+    CG_ADMOB_728x90 = 5,
+
+} CGAdMobBannerAdSize;
+
+
 
 functions:
 
@@ -113,6 +132,12 @@ void IsLandscape(bool landscape) run_on_os_thread
 * Optional: If not called banner will display at the top.
 */
 void BannerAdPosition(CGAdMobPosition position) run_on_os_thread
+
+/**
+* Optional: If not called banner size will be "Smart Banner" as defined by Google.
+*/
+void BannerAdSize(CGAdMobBannerAdSize size) run_on_os_thread
+
 
 /**
 * Optional: Sets the test device string.

@@ -79,6 +79,25 @@ typedef enum CGAdMobPosition
     CG_ADMOB_POSITION_TOP    = 1,  ///< Ad is positioned at top of screen.
     CG_ADMOB_POSITION_BOTTOM = 2,  ///< Ad is positioned at bottom of screen.
 } CGAdMobPosition;
+
+
+/**
+* Banner Ad Size.
+*
+* @par Required Header Files
+* CGAdMob.h
+*/
+typedef enum CGAdMobBannerAdSize
+{
+
+    CG_ADMOB_SMART = 0, ///< Default ad size.
+    CG_ADMOB_320x50 = 1,
+    CG_ADMOB_320x100 = 2,
+    CG_ADMOB_300x250 = 3,
+    CG_ADMOB_468x60 = 4,
+    CG_ADMOB_728x90 = 5,
+
+} CGAdMobBannerAdSize;
 // \cond HIDDEN_DEFINES
 S3E_BEGIN_C_DECL
 // \endcond
@@ -159,6 +178,11 @@ void IsLandscape(bool landscape);
 * Optional: If not called banner will display at the top.
 */
 void BannerAdPosition(CGAdMobPosition position);
+
+/**
+* Optional: If not called banner size will be "Smart Banner" as defined by Google.
+*/
+void BannerAdSize(CGAdMobBannerAdSize size);
 
 /**
 * Optional: Sets the test device string.

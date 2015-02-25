@@ -201,6 +201,8 @@ const char* _interstatialAdUnitId;
 const char* _testDeviceHashId;
 bool _landscape = false;
 bool _displayBannerAtBottom = false;
+int _adSize = 0;
+
 
 
 s3eResult CGAdMobInit_platform()
@@ -214,36 +216,53 @@ void CGAdMobTerminate_platform()
 
 void InitAdView_platform()
 {
-    //Start the banner ads
-    if (_landscape) {
-        
-        if (_displayBannerAtBottom) {
+    
+    GADAdSize bannerAdSize;
+    
+    switch (_adSize) {
+        case 1:
+            bannerAdSize = kGADAdSizeBanner;
+            break;
+        case 2:
+            bannerAdSize = kGADAdSizeLargeBanner;
+            break;
+        case 3:
+            bannerAdSize = kGADAdSizeMediumRectangle;
+            break;
+        case 4:
+            bannerAdSize = kGADAdSizeFullBanner;
+            break;
+        case 5:
+            bannerAdSize = kGADAdSizeLeaderboard;
+            break;
+        default:
+            NSString *info;
+            info = [NSString stringWithFormat:
+                    @"--------------------------------------- Smartbanner size being used."];
+            s3eDebugOutputString([info UTF8String]);
             
-            CGSize adSize = CGSizeFromGADAdSize(kGADAdSizeSmartBannerLandscape);
-            CGPoint origin = CGPointMake((s3eEdkGetUIViewController().view.frame.size.height - adSize.width) / 2, s3eEdkGetUIViewController().view.frame.size.width - adSize.height);
-            intAd.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerLandscape origin:(CGPoint)origin];
-        }else{
-            CGSize adSize = CGSizeFromGADAdSize(kGADAdSizeSmartBannerLandscape);
-            CGPoint origin = CGPointMake((s3eEdkGetUIViewController().view.frame.size.height - adSize.width) / 2, 0.0);
-            intAd.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerLandscape origin:(CGPoint)origin];
             
-        }
-        
-    } else
-    {
-        if (_displayBannerAtBottom) {
+            if (_landscape) {
+                bannerAdSize = kGADAdSizeSmartBannerLandscape;
+            } else {
+                bannerAdSize = kGADAdSizeSmartBannerPortrait;
+            }
             
-            
-            CGSize adSize = CGSizeFromGADAdSize(kGADAdSizeSmartBannerPortrait);
-            CGPoint origin = CGPointMake(0.0, s3eEdkGetUIViewController().view.frame.size.height - adSize.height);
-            intAd.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait origin:origin];
-            
-        } else {
-            intAd.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
-        }
+            break;
     }
     
+    CGSize adSize = CGSizeFromGADAdSize(bannerAdSize);
+    CGPoint origin;
     
+    if (_displayBannerAtBottom) {
+
+            origin = CGPointMake((s3eEdkGetUIViewController().view.frame.size.width - adSize.width) / 2, s3eEdkGetUIViewController().view.frame.size.height - adSize.height);
+        
+    } else {
+            origin = CGPointMake((s3eEdkGetUIViewController().view.frame.size.width - adSize.width) / 2, 0.0);
+    }
+    
+    intAd.bannerView = [[GADBannerView alloc] initWithAdSize:bannerAdSize origin:(CGPoint)origin];
     intAd.deviceHashId = [[NSString alloc] initWithUTF8String:_testDeviceHashId];
     intAd.bannerView.adUnitID = [[NSString alloc] initWithUTF8String:_bannerAdUnitId];
     intAd.bannerView.rootViewController = s3eEdkGetUIViewController();
@@ -273,6 +292,7 @@ void SetGoogleAppKey_platform(const char* bannerAdUnitId, const char* interstati
 void BannerAdLoad_platform()
 {
     [intAd loadBannerRequest];
+    [intAd.bannerView setHidden:NO];
 }
 
 void BannerAdShow_platform()
@@ -294,9 +314,19 @@ void IsLandscape_platform(bool landscape)
 void BannerAdPosition_platform(CGAdMobPosition position)
 {
     if (position == CG_ADMOB_POSITION_BOTTOM) {
+        
         _displayBannerAtBottom = true;
+        
+        
     } else {
        _displayBannerAtBottom = false;
+    }
+}
+
+void BannerAdSize_platform(CGAdMobBannerAdSize size)
+{
+    if (size > 0) {
+        _adSize = size;
     }
 }
 

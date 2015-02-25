@@ -63,6 +63,11 @@ void BannerAdPosition(CGAdMobPosition position)
 	BannerAdPosition_platform(position);
 }
 
+void BannerAdSize(CGAdMobBannerAdSize size)
+{
+	BannerAdSize_platform(size);
+}
+
 void TestDeviceHashedId(const char* deviceHashId)
 {
 	TestDeviceHashedId_platform(deviceHashId);

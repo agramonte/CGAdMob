@@ -32,6 +32,7 @@ typedef       void(*BannerAdShow_t)();
 typedef       void(*BannerAdHide_t)();
 typedef       void(*IsLandscape_t)(bool landscape);
 typedef       void(*BannerAdPosition_t)(CGAdMobPosition position);
+typedef       void(*BannerAdSize_t)(CGAdMobBannerAdSize size);
 typedef       void(*TestDeviceHashedId_t)(const char* deviceHashId);
 typedef       void(*Release_t)();
 
@@ -50,6 +51,7 @@ typedef struct CGAdMobFuncs
     BannerAdHide_t m_BannerAdHide;
     IsLandscape_t m_IsLandscape;
     BannerAdPosition_t m_BannerAdPosition;
+    BannerAdSize_t m_BannerAdSize;
     TestDeviceHashedId_t m_TestDeviceHashedId;
     Release_t m_Release;
 } CGAdMobFuncs;
@@ -297,9 +299,29 @@ void BannerAdPosition(CGAdMobPosition position)
     return;
 }
 
+void BannerAdSize(CGAdMobBannerAdSize size)
+{
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[10] func: BannerAdSize"));
+
+    if (!_extLoad())
+        return;
+
+#ifdef LOADER_CALL_LOCK
+    s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
+#endif
+
+    g_Ext.m_BannerAdSize(size);
+
+#ifdef LOADER_CALL_LOCK
+    s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
+#endif
+
+    return;
+}
+
 void TestDeviceHashedId(const char* deviceHashId)
 {
-    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[10] func: TestDeviceHashedId"));
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[11] func: TestDeviceHashedId"));
 
     if (!_extLoad())
         return;
@@ -319,7 +341,7 @@ void TestDeviceHashedId(const char* deviceHashId)
 
 void Release()
 {
-    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[11] func: Release"));
+    IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[12] func: Release"));
 
     if (!_extLoad())
         return;

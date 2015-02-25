@@ -25,6 +25,13 @@ class CGAdMob
     public final static int CG_ADMOB_POSITION_TOP    = 1;
     public final static int CG_ADMOB_POSITION_BOTTOM = 2;
     
+    public final static int CG_ADMOB_SMART = 0;
+    public final static int CG_ADMOB_320x50 = 1;
+    public final static int CG_ADMOB_320x100 = 2;
+    public final static int CG_ADMOB_300x250 = 3;
+    public final static int CG_ADMOB_468x60 = 4;
+    public final static int CG_ADMOB_728x90 = 5;
+    
     private AdView _googleAdView;
     private RelativeLayout _adLayout;
 	private InterstitialAd _mInterstitialAd;
@@ -37,6 +44,7 @@ class CGAdMob
     private boolean _isLandscape = false;
     private String _testDeviceHashId = "";
     private boolean _showAtBottom = false;
+    private int adSize = 0;
     
     
     
@@ -122,18 +130,34 @@ class CGAdMob
                 
     }
     
+    private void _setAdSize(){
+        
+        switch (adSize) {
+            case 1: this._googleAdView.setAdSize(AdSize.BANNER);
+                break;
+            case 2: this._googleAdView.setAdSize(AdSize.LARGE_BANNER);
+                break;
+            case 3: this._googleAdView.setAdSize(AdSize.MEDIUM_RECTANGLE);
+                break;
+            case 4: this._googleAdView.setAdSize(AdSize.FULL_BANNER);
+                break;
+            case 5: this._googleAdView.setAdSize(AdSize.LEADERBOARD);
+                break;
+            default: this._googleAdView.setAdSize(AdSize.SMART_BANNER);
+                break;
+        }
+    }
+    
     
     private void _setGoogleAds(){
-        
-        
-        
         
         //Set up google banner.
         _adLayout = new RelativeLayout(LoaderActivity.m_Activity);
         
         this._googleAdView = new AdView(LoaderActivity.m_Activity);
         this._googleAdView.setAdUnitId(_bannerAdUnitId);
-        this._googleAdView.setAdSize(AdSize.SMART_BANNER);
+        this._setAdSize();
+        //this._googleAdView.setAdSize(adSize);
         
         this._googleAdView.setLayoutParams(_lp);
         _adLayout.addView(_googleAdView);
@@ -180,6 +204,14 @@ class CGAdMob
             this._showAtBottom = false;
         }
         
+        
+    }
+    
+    public void BannerAdSize(int size)
+    {
+        if(size > 0) {
+           adSize = size;
+        }
         
     }
     
