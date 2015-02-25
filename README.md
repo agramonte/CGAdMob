@@ -6,7 +6,7 @@ Platform Support: Android, iOS (Library 7.0).
 
 Built with Marmalade version: 7.5 and iOS 8 SDK
 
-Instructions (test project demonstrate other options):
+Instructions (test project demonstrates other options):
 
 1. Add the project CGAdMob
 
