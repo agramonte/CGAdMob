@@ -1,4 +1,4 @@
-As I have done with my other extensions: Since Marmalade has an official version, I will no longer be updating this version (although some might still find the iOS portion useful). I want to thank all the people that helped me get this running originally.
+As I have done with my other extensions: Since Marmalade has an official version, I will no longer be updating this version. I want to thank all the people that helped me get this running originally.
 
 CGAdMob
 ==========
