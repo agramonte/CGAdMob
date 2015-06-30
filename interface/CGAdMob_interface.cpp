@@ -11,50 +11,17 @@
 #include "CGAdMob.h"
 
 
+// Define S3E_EXT_SKIP_LOADER_CALL_LOCK on the user-side to skip LoaderCallStart/LoaderCallDone()-entry.
+// e.g. in s3eNUI this is used for generic user-side IwUI-based implementation.
 #ifndef S3E_EXT_SKIP_LOADER_CALL_LOCK
-// For MIPs (and WP8) platform we do not have asm code for stack switching
-// implemented. So we make LoaderCallStart call manually to set GlobalLock
-#if defined __mips || defined S3E_ANDROID_X86 || (defined(WINAPI_FAMILY) && (WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP))
+#if defined I3D_ARCH_MIPS || defined S3E_ANDROID_X86 || (defined(WINAPI_FAMILY) && (WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP)) || defined I3D_ARCH_NACLX86_64
+// For platforms missing stack-switching (MIPS, WP8, Android-x86, NaCl, etc.) make loader-entry via LoaderCallStart/LoaderCallDone() on the user-side.
 #define LOADER_CALL_LOCK
 #endif
 #endif
 
-/**
- * Definitions for functions types passed to/from s3eExt interface
- */
-typedef  s3eResult(*CGAdMobRegister_t)(CGAdMobCallback cbid, s3eCallback fn, void* userData);
-typedef  s3eResult(*CGAdMobUnRegister_t)(CGAdMobCallback cbid, s3eCallback fn);
-typedef       void(*InitAdView_t)();
-typedef  s3eResult(*ShowInterstitialAd_t)();
-typedef       void(*SetGoogleAppKey_t)(const char* bannerAdUnitId, const char* interstatialAdUnitId);
-typedef       void(*BannerAdLoad_t)();
-typedef       void(*BannerAdShow_t)();
-typedef       void(*BannerAdHide_t)();
-typedef       void(*IsLandscape_t)(bool landscape);
-typedef       void(*BannerAdPosition_t)(CGAdMobPosition position);
-typedef       void(*BannerAdSize_t)(CGAdMobBannerAdSize size);
-typedef       void(*TestDeviceHashedId_t)(const char* deviceHashId);
-typedef       void(*Release_t)();
 
-/**
- * struct that gets filled in by CGAdMobRegister
- */
-typedef struct CGAdMobFuncs
-{
-    CGAdMobRegister_t m_CGAdMobRegister;
-    CGAdMobUnRegister_t m_CGAdMobUnRegister;
-    InitAdView_t m_InitAdView;
-    ShowInterstitialAd_t m_ShowInterstitialAd;
-    SetGoogleAppKey_t m_SetGoogleAppKey;
-    BannerAdLoad_t m_BannerAdLoad;
-    BannerAdShow_t m_BannerAdShow;
-    BannerAdHide_t m_BannerAdHide;
-    IsLandscape_t m_IsLandscape;
-    BannerAdPosition_t m_BannerAdPosition;
-    BannerAdSize_t m_BannerAdSize;
-    TestDeviceHashedId_t m_TestDeviceHashedId;
-    Release_t m_Release;
-} CGAdMobFuncs;
+#include "CGAdMob_interface.h"
 
 static CGAdMobFuncs g_Ext;
 static bool g_GotExt = false;
@@ -107,13 +74,13 @@ s3eResult CGAdMobRegister(CGAdMobCallback cbid, s3eCallback fn, void* userData)
         return S3E_RESULT_ERROR;
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallStart(S3E_TRUE, (void*)g_Ext.m_CGAdMobRegister);
 #endif
 
     s3eResult ret = g_Ext.m_CGAdMobRegister(cbid, fn, userData);
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallDone(S3E_TRUE, (void*)g_Ext.m_CGAdMobRegister);
 #endif
 
     return ret;
@@ -127,13 +94,13 @@ s3eResult CGAdMobUnRegister(CGAdMobCallback cbid, s3eCallback fn)
         return S3E_RESULT_ERROR;
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallStart(S3E_TRUE, (void*)g_Ext.m_CGAdMobUnRegister);
 #endif
 
     s3eResult ret = g_Ext.m_CGAdMobUnRegister(cbid, fn);
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallDone(S3E_TRUE, (void*)g_Ext.m_CGAdMobUnRegister);
 #endif
 
     return ret;
@@ -147,13 +114,13 @@ void InitAdView()
         return;
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallStart(S3E_TRUE, (void*)g_Ext.m_InitAdView);
 #endif
 
     g_Ext.m_InitAdView();
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallDone(S3E_TRUE, (void*)g_Ext.m_InitAdView);
 #endif
 
     return;
@@ -164,16 +131,16 @@ s3eResult ShowInterstitialAd()
     IwTrace(CGADMOB_VERBOSE, ("calling CGAdMob[3] func: ShowInterstitialAd"));
 
     if (!_extLoad())
-        return S3E_RESULT_ERROR;
+        return S3E_RESULT_SUCCESS;
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallStart(S3E_TRUE, (void*)g_Ext.m_ShowInterstitialAd);
 #endif
 
     s3eResult ret = g_Ext.m_ShowInterstitialAd();
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallDone(S3E_TRUE, (void*)g_Ext.m_ShowInterstitialAd);
 #endif
 
     return ret;
@@ -187,13 +154,13 @@ void SetGoogleAppKey(const char* bannerAdUnitId, const char* interstatialAdUnitI
         return;
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallStart(S3E_TRUE, (void*)g_Ext.m_SetGoogleAppKey);
 #endif
 
     g_Ext.m_SetGoogleAppKey(bannerAdUnitId, interstatialAdUnitId);
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallDone(S3E_TRUE, (void*)g_Ext.m_SetGoogleAppKey);
 #endif
 
     return;
@@ -207,13 +174,13 @@ void BannerAdLoad()
         return;
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallStart(S3E_TRUE, (void*)g_Ext.m_BannerAdLoad);
 #endif
 
     g_Ext.m_BannerAdLoad();
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallDone(S3E_TRUE, (void*)g_Ext.m_BannerAdLoad);
 #endif
 
     return;
@@ -227,13 +194,13 @@ void BannerAdShow()
         return;
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallStart(S3E_TRUE, (void*)g_Ext.m_BannerAdShow);
 #endif
 
     g_Ext.m_BannerAdShow();
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallDone(S3E_TRUE, (void*)g_Ext.m_BannerAdShow);
 #endif
 
     return;
@@ -247,13 +214,13 @@ void BannerAdHide()
         return;
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallStart(S3E_TRUE, (void*)g_Ext.m_BannerAdHide);
 #endif
 
     g_Ext.m_BannerAdHide();
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallDone(S3E_TRUE, (void*)g_Ext.m_BannerAdHide);
 #endif
 
     return;
@@ -267,13 +234,13 @@ void IsLandscape(bool landscape)
         return;
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallStart(S3E_TRUE, (void*)g_Ext.m_IsLandscape);
 #endif
 
     g_Ext.m_IsLandscape(landscape);
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallDone(S3E_TRUE, (void*)g_Ext.m_IsLandscape);
 #endif
 
     return;
@@ -287,13 +254,13 @@ void BannerAdPosition(CGAdMobPosition position)
         return;
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallStart(S3E_TRUE, (void*)g_Ext.m_BannerAdPosition);
 #endif
 
     g_Ext.m_BannerAdPosition(position);
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallDone(S3E_TRUE, (void*)g_Ext.m_BannerAdPosition);
 #endif
 
     return;
@@ -307,13 +274,13 @@ void BannerAdSize(CGAdMobBannerAdSize size)
         return;
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallStart(S3E_TRUE, (void*)g_Ext.m_BannerAdSize);
 #endif
 
     g_Ext.m_BannerAdSize(size);
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallDone(S3E_TRUE, (void*)g_Ext.m_BannerAdSize);
 #endif
 
     return;
@@ -327,13 +294,13 @@ void TestDeviceHashedId(const char* deviceHashId)
         return;
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallStart(S3E_TRUE, (void*)g_Ext.m_TestDeviceHashedId);
 #endif
 
     g_Ext.m_TestDeviceHashedId(deviceHashId);
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallDone(S3E_TRUE, (void*)g_Ext.m_TestDeviceHashedId);
 #endif
 
     return;
@@ -347,13 +314,13 @@ void Release()
         return;
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallStart(S3E_TRUE, (void*)g_Ext.m_Release);
 #endif
 
     g_Ext.m_Release();
 
 #ifdef LOADER_CALL_LOCK
-    s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
+    s3eDeviceLoaderCallDone(S3E_TRUE, (void*)g_Ext.m_Release);
 #endif
 
     return;

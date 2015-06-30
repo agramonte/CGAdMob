@@ -194,6 +194,8 @@ void TestDeviceHashedId(const char* deviceHashId);
  */
 void Release();
 
+// \cond HIDDEN_DEFINES
 S3E_END_C_DECL
+// \endcond
 
 #endif /* !S3E_EXT_CGADMOB_H */

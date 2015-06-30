@@ -151,7 +151,7 @@ didFailToReceiveAdWithError:(GADRequestError *)error{
 -(void)initInterstitial:(const char *)appId{
     
     self.interstatialAdId = appId;
-    self.initInterstitial;
+    [self initInterstitial];
 }
 
 -(void)initInterstitial{
@@ -170,13 +170,13 @@ didFailToReceiveAdWithError:(GADRequestError *)error{
         self.interstitialError = false;
         
         
-        self.initInterstitial;
-        self.loadInterstitialRequest;
+        [self initInterstitial];
+        [self loadInterstitialRequest];
         
     } else if (self.interstitialError) {
         
-        self.initInterstitial;
-        self.loadInterstitialRequest;
+        [self initInterstitial];
+        [self loadInterstitialRequest];
         
     } else {
         NSString *info;
@@ -236,15 +236,11 @@ void InitAdView_platform()
             bannerAdSize = kGADAdSizeLeaderboard;
             break;
         default:
-<<<<<<< HEAD
             NSString *info;
             info = [NSString stringWithFormat:
                     @"--------------------------------------- Smartbanner size being used."];
             s3eDebugOutputString([info UTF8String]);
             
-            
-=======
->>>>>>> origin/master
             if (_landscape) {
                 bannerAdSize = kGADAdSizeSmartBannerLandscape;
             } else {
@@ -258,18 +254,16 @@ void InitAdView_platform()
     CGPoint origin;
     
     if (_displayBannerAtBottom) {
-<<<<<<< HEAD
-
+//<<<<<<< HEAD
             origin = CGPointMake((s3eEdkGetUIViewController().view.frame.size.width - adSize.width) / 2, s3eEdkGetUIViewController().view.frame.size.height - adSize.height);
-        
-    } else {
+   } else {
             origin = CGPointMake((s3eEdkGetUIViewController().view.frame.size.width - adSize.width) / 2, 0.0);
-=======
-        origin = CGPointMake((s3eEdkGetUIViewController().view.frame.size.height - adSize.width) / 2, s3eEdkGetUIViewController().view.frame.size.width - adSize.height);
-    } else {
-        origin = CGPointMake((s3eEdkGetUIViewController().view.frame.size.height - adSize.width) / 2, 0.0);
+//=======
+//        origin = CGPointMake((s3eEdkGetUIViewController().view.frame.size.height - adSize.width) / 2, s3eEdkGetUIViewController().view.frame.size.width - adSize.height);
+//    } else {
+//        origin = CGPointMake((s3eEdkGetUIViewController().view.frame.size.height - adSize.width) / 2, 0.0);
         
->>>>>>> origin/master
+//>>>>>>> origin/master
     }
     
     intAd.bannerView = [[GADBannerView alloc] initWithAdSize:bannerAdSize origin:(CGPoint)origin];

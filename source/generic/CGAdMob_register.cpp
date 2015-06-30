@@ -91,16 +91,27 @@ static void Release_wrap()
 }
 
 #define InitAdView InitAdView_wrap
+
 #define ShowInterstitialAd ShowInterstitialAd_wrap
+
 #define SetGoogleAppKey SetGoogleAppKey_wrap
+
 #define BannerAdLoad BannerAdLoad_wrap
+
 #define BannerAdShow BannerAdShow_wrap
+
 #define BannerAdHide BannerAdHide_wrap
+
 #define IsLandscape IsLandscape_wrap
+
 #define BannerAdPosition BannerAdPosition_wrap
+
 #define BannerAdSize BannerAdSize_wrap
+
 #define TestDeviceHashedId TestDeviceHashedId_wrap
+
 #define Release Release_wrap
+
 
 #endif
 
